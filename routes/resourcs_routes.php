@@ -65,6 +65,11 @@ Route::group(['middleware' => 'auth'], function () {
 				'uses' => 'ifa\Status\InactiveController@viewInactive'
 			]);
 
+		/** Ajax route **/
+
+		Route::get('ifa/management/all/value','ifa\PartiallyCompleted@getIfaAllValue');
+		Route::get('/getMenuFilterValue','ifa\PartiallyCompleted@getIfaFilterValue');
+
 	});
 });
 
