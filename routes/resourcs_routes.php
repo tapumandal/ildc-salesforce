@@ -223,12 +223,7 @@ Route::group(['middleware' => 'auth'], function () {
 				'uses' => 'ManagementSetting\TrainingNameController@updateTraining'
 			]);
 
-		/** Training schedule route**/
 
-		Route::get('training/schedule', [
-				'as' => 'training_schedule_view',
-				'uses' => 'ManagementSetting\TrainingSchedule@viewTrainingSche'
-			]);
 
 		/** Exam schedule route**/
 
