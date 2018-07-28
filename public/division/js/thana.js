@@ -4,6 +4,7 @@ var thanasDistrict = (function(){
         init: function () {
         	$('#division_id').on('change',function(){
 				var selectedValue = $.trim($("#division_id").find(":selected").val());
+				
 				$.ajax({
 		          type: "GET",
 		          url: "/get/division",

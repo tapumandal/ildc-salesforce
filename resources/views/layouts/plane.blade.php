@@ -14,9 +14,9 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
 
-		{{-- for select2 --}}
-	<link href="{{ asset("assets/customByMxp/css/select2.min.css") }}" rel="stylesheet" />
-	<script src="{{ asset("assets/customByMxp/js/select2.min.js") }}"></script>
+		<!-- for select2 -->
+	<link href="{{ asset('assets/customByMxp/css/select2.min.css') }}" rel="stylesheet" />
+	<script src="{{ asset('assets/customByMxp/js/select2.min.js') }}"></script>
 </head>
 <body>
 	<?php $languages = App\Http\Controllers\Trans\TranslationController::getLanguageList();?>
@@ -36,10 +36,13 @@
 
 	@yield('body')
 
-	<script src="{{ asset("assets/scripts/frontend.js") }}" type="text/javascript"></script>
-	<script type="text/javascript" src="{{ asset("js/custom.js") }}"></script>
-	<script type="text/javascript" src="{{ asset("js/all_product_table.js") }}"></script>
-	<script type="text/javascript" src="{{ asset("js/journal.js") }}"></script>
-	<script type="text/javascript" src="{{ asset("js/new_saleforces.js") }}"></script>
+
+	<script src="{{ asset('assets/scripts/frontend.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('assets/scripts/ifa_filter.js') }}" type="text/javascript"></script>
+	<script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/all_product_table.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/journal.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/new_saleforces.js') }}"></script>
+
 </body>
 </html>
