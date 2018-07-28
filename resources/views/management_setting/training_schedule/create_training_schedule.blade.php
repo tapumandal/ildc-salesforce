@@ -37,20 +37,20 @@
 
 
 
-                        <div class="form-group add_input{{ $errors->has('name') ? ' has-error' : ''}}">
-                            <label class="col-md-4 control-label">
-                                <span class="pull-right">Schedule Name</span>
-                            </label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="training_schedule_name" value="{{ old('training_schedule_name')  }}" placeholder="Name(optional)">
+                        {{--<div class="form-group add_input{{ $errors->has('name') ? ' has-error' : ''}}">--}}
+                            {{--<label class="col-md-4 control-label">--}}
+                                {{--<span class="pull-right">Schedule Name</span>--}}
+                            {{--</label>--}}
+                            {{--<div class="col-md-6">--}}
+                                {{--<input type="text" class="form-control" name="training_schedule_name" value="{{ old('training_schedule_name')  }}" placeholder="Name(optional)">--}}
 
-                                @if($errors->has('name'))
-                                    <span class="help-block">
-											{{ $errors->first('name')}}
-										</span>
-                                @endif
-                            </div>
-                        </div>
+                                {{--@if($errors->has('name'))--}}
+                                    {{--<span class="help-block">--}}
+											{{--{{ $errors->first('name')}}--}}
+										{{--</span>--}}
+                                {{--@endif--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                         <div class="form-group add_input{{ $errors->has('start_date') ? ' has-error' : ''}}">
                             <label class="col-md-4 control-label">
@@ -90,30 +90,67 @@
 
 
 
-                        <div class="form-group add_input">
-                            <label class="col-md-4 control-label">
-                                <span class="pull-right">Status</span>
-                            </label>
-                            <div class="col-md-6">
-                                <div class="select">
-                                    <select class="form-control" type="select" name="is_active" >
-                                        <option  value="1" name="isActive" >Active</option>
-                                        <option value="0" name="isActive" >Inactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        {{--<div class="form-group add_input">--}}
+                            {{--<label class="col-md-4 control-label">--}}
+                                {{--<span class="pull-right">Status</span>--}}
+                            {{--</label>--}}
+                            {{--<div class="col-md-6">--}}
+                                {{--<div class="select">--}}
+                                    {{--<select class="form-control" type="select" name="is_active" >--}}
+                                        {{--<option  value="1" name="isActive" >Active</option>--}}
+                                        {{--<option value="0" name="isActive" >Inactive</option>--}}
+                                    {{--</select>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
+
+                        <table class="table table-bordered table-striped" id="tblSearch">
+                            <thead>
+                                <tr>
+                                    <th class="">Serial</th>
+                                    <th class="">Name</th>
+                                    <th class="">Mobile No.</th>
+                                    <th class="">Email</th>
+                                    <th class="">Thana</th>
+                                    <th class="">As Participant</th>
+                                    {{--<th class="">Training Required</th>--}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php($i =1)
+                                @foreach($applicants as $applicant)
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>
+                                        {{ $applicant->first_name}} {{ $applicant->last_name}}
+                                        <input type="hidden" name="applicant_no[]" value="{{ $applicant->application_no }}">
+                                    </td>
+                                    <td>{{ $applicant->mobile_no}}</td>
+                                    <td>{{ $applicant->email}}</td>
+                                    <td>{{ $applicant->pre_addr_ps_id }}</td>
+                                    <td>
+                                        <input type="checkbox" value="1" name="training_status[{{ $applicant->application_no }}]">
+                                    </td>
+                                    {{--<td>--}}
+                                        <input type="hidden" value="1" name="is_required[{{ $applicant->application_no }}]" checked>
+                                    {{--</td>--}}
+                                </tr>
+                                @php($i++)
+                                @endforeach
+                            </tbody>
+                        </table>
                         <div class="form-group add_input">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary" style="margin-right: 15px;">Submit
+                            <div class="col-md-2 col-md-offset-10" style="padding-right: 0px;">
+                                <button type="submit" class="btn btn-primary" style="width:100%">Submit
                                 </button>
                             </div>
                         </div>
                     </form>
-                </div>
+
+
+
             </div>
         </div>
-        <!-- </div> -->
     </div>
 @endsection

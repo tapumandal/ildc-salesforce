@@ -20,8 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('training/schedule/create', 'ManagementSetting\TrainingSchedule@trainingScheduleCreateView')
             ->name('create_training_schedule_view');
 
-        Route::post('training/schedule/create', 'ManagementSetting\TrainingSchedule@trainingScheduleCreateAction')
-            ->name('create_training_schedule_action');
+        Route::post('training/schedule/create', 'ManagementSetting\TrainingSchedule@trainingScheduleCreateAction')->name('create_training_schedule_action');
 
     });
 });
