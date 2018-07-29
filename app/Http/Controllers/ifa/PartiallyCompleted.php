@@ -7,6 +7,7 @@ use App\Model\IfaManagement\IfaRegistration;
 use App\Model\IfaManagement\FilterOption;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Validator;
 use Auth;
 use DB;
@@ -25,18 +26,45 @@ class PartiallyCompleted extends Controller
 
     public function getIfaAllValue(Request $request){
     	return json_encode(IfaRegistration::get());
+
+
     }
     public function getIfaFilterValue(Request $request){
 
-		$aaa = new IfaRegistration();
-	 	
-	 	$data = $aaa->whereDate('created_at','>=',date($request->formDateValues))
-	 			->whereDate('created_at','<=',date($request->toDateValues))
-	 			->where('application_status',$request->selectedOptionValues)
-	 			->orderBy('application_no',(!empty($request->sortbyValues) ? $request->sortbyValues : "ASC"))
-	 			->get();
+		$object = new IfaRegistration();
+        if(!empty($request->sortbyValues) && empty($request->selectedOptionValues) && empty($request->formDateValues) && empty($request->toDateValues)){
+            $data = $object->orderBy('application_no',$request->sortbyValues)                    
+                    ->get();
+        }
+	 	else if(!empty($request->selectedOptionValues) && empty($request->formDateValues) && empty($request->toDateValues))
+        {
+            $data = $object->where('application_status',$request->selectedOptionValues)
+                    ->orderBy('application_no',(!empty($request->sortbyValues) ? $request->sortbyValues : "ASC"))
+                    ->get();
+                
+        }else if(!empty($request->selectedOptionValues) && !empty($request->formDateValues) && empty($request->toDateValues)){
 
-    	// return $data;
+            $data = $object->whereDate('created_at','>=',date($request->formDateValues))
+                    ->whereDate('created_at','<=',Carbon::now()->format('Ymd'))
+                    ->where('application_status',$request->selectedOptionValues)
+                    ->orderBy('application_no',(!empty($request->sortbyValues) ? $request->sortbyValues : "ASC"))
+                    ->get();
+
+        }else if(empty($request->selectedOptionValues) && !empty($request->formDateValues) && !empty($request->toDateValues)){
+
+            $data = $object->whereDate('created_at','>=',date($request->formDateValues))
+                    ->whereDate('created_at','<=',date($request->toDateValues))
+                    ->orderBy('application_no',(!empty($request->sortbyValues) ? $request->sortbyValues : "ASC"))
+                    ->get();
+        }else{
+
+    	 	$data = $object->whereDate('created_at','>=',date($request->formDateValues))
+    	 			->whereDate('created_at','<=',date($request->toDateValues))
+    	 			->where('application_status',$request->selectedOptionValues)
+    	 			->orderBy('application_no',(!empty($request->sortbyValues) ? $request->sortbyValues : "ASC"))
+    	 			->get();
+        }
+
     	return json_encode($data);
     }
 }
