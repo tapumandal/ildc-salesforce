@@ -20,8 +20,6 @@ class TrainingSchedule extends Controller
     public function viewTrainingSche(){
 
         $trainingSchedule = TrainingDetails::with('trainingName')->get();
-
-
     	return view('management_setting.training_schedule.trainingScheduleList', compact('trainingSchedule'));
     }
 
