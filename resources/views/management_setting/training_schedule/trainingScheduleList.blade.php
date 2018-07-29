@@ -32,19 +32,23 @@
                 <th class="">End Sate</th>
                 <th class="">Start Time</th>
                 <th class="">End Time</th>
+                <th class="">List</th>
             </tr>
         </thead>
         <tbody>
+            @php($i=1)
             @foreach($trainingSchedule as  $sche)
 
                 <tr>
-                    <td>1</td>
+                    <td>{{$i}}</td>
                     <td>{{ $sche->trainingName['name']  }}</td>
                     <td>{{ $sche->start_date }}</td>
                     <td>{{ $sche->end_date }}</td>
                     <td>{{ $sche->start_time }}</td>
                     <td>{{ $sche->end_time }}</td>
+                    <td><a href="{{ route('schedule_trainee_view', $sche->id) }}">Trainees</a></td>
                 </tr>
+                @php($i++)
             @endforeach
         </tbody>
     </table>

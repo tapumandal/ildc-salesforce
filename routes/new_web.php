@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
             ->name('create_training_schedule_view');
 
         Route::post('training/schedule/create', 'ManagementSetting\TrainingSchedule@trainingScheduleCreateAction')->name('create_training_schedule_action');
-
+        Route::get('schedule/{schedule_id?}/trainee', 'ManagementSetting\ApplicantTrainingManagement@scheduleTraineeView')->name('schedule_trainee_view');
+        Route::get('schedule/{schedule_id?}/trainee/{application_no}/remove', 'ManagementSetting\ApplicantTrainingManagement@traineeRemove')->name('trainee_remove_action');
     });
 });
