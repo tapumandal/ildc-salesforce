@@ -9123,3 +9123,20 @@ span.req_star{
   padding: 20px 10px 20px 30px;
   border-radius: 3px;
 }
+
+.main_body .add_body .input_title{
+  padding-bottom: 10px;
+}
+.main_body .add_body .title{
+  padding-top: 10px;
+}
+
+.main_body .add_body .input_title > span{
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.has-error .help-block{
+  clear :both;
+}
