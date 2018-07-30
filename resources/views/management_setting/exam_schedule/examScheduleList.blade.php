@@ -1,22 +1,17 @@
 @extends('layouts.dashboard')
 @section('page_heading','Exam Schedule')
 @section('section')
+<div class="col-sm-3"></div>
+<div class="col-sm-9">
+    <div class="input-group add-on" style="width:100%;">
+        <input class="form-control" placeholder="Search" name="srch-term" id="user_search" type="text">
+        <div class="input-group-btn pull-left">
+        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+    </div>
+</div>
+<br><br>
 <div class="col-sm-12">
-	<div class="col-sm-12">
-		<div class="col-sm-2"></div>
-		<div class="col-sm-10">
-			<div class="input-group add-on" style="width:100%;">
-		    	<input class="form-control" placeholder="Search" name="srch-term" id="user_search" type="text">
-		    	<div class="input-group-btn pull-left">
-		        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-		    	</div>
-		    </div>
-		</div>
-	</div>
-    
-    <br>
-    <br>
-
     <table class="table table-bordered table-striped" id="tblSearch">
         <thead>
             <tr>
