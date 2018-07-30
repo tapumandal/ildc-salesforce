@@ -141,6 +141,26 @@ Route::group(['middleware' => 'auth'], function () {
 				'as' => 'create_lead_view',
 				'uses' => 'Lead\CreateLeadController@viewCreateLeadList'
 			]);
+		Route::get('add/lead', [
+				'as' => 'add_lead_view',
+				'uses' => 'Lead\CreateLeadController@addLeadview'
+			]);
+
+		Route::post('store/lead', [
+				'as' => 'store_create_lead',
+				'uses' => 'Lead\CreateLeadController@storeLead'
+			]);
+
+		Route::get('edit/lead', [
+				'as' => 'edit_create_lead',
+				'uses' => 'Lead\CreateLeadController@editLeadView'
+			]);
+		Route::post('update/lead', [
+				'as' => 'update_create_lead',
+				'uses' => 'Lead\CreateLeadController@updateLead'
+			]);
+		Route::get('/lead/list/Filter/Value','Lead\LeadSearchController@getLeadSearchValue');
+		Route::get('/lead/list/all/value','Lead\LeadSearchController@getLeadAllValue');
 	});
 });
 

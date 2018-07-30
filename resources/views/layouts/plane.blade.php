@@ -39,6 +39,7 @@
 
 	<script src="{{ asset('assets/scripts/frontend.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('assets/scripts/ifa_filter.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('assets/scripts/lead_filter.js') }}" type="text/javascript"></script>
 	<script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/all_product_table.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/journal.js') }}"></script>

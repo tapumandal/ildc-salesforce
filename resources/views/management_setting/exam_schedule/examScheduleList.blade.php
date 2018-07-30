@@ -24,6 +24,7 @@
 
         <table class="table table-bordered table-striped" id="tblSearch">
             <thead>
+
             <tr>
                 <th class="">Serial</th>
                 <th class="">Exam Name</th>

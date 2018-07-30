@@ -1,26 +1,23 @@
 @extends('layouts.dashboard')
 @section('page_heading','Training Name')
 @section('section')
-<div class="col-sm-12">
-	<div class="col-sm-12">
-		<div class="col-sm-3">
-            <div class="pull-left">
-                <a href="{{ route('add_training_name_view')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Training Name </a>
-            </div>      
+<div class="col-sm-3">
+    <div class="pull-left">
+        <a href="{{ route('add_training_name_view')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Training Name </a>
+    </div>      
+</div>
+<div class="col-sm-9">
+    <div class="input-group add-on" style="width:100%;">
+        <input class="form-control" placeholder="Search" name="srch-term" id="user_search" type="text">
+        <div class="input-group-btn pull-left">
+        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
         </div>
-		<div class="col-sm-9">
-			<div class="input-group add-on" style="width:100%;">
-		    	<input class="form-control" placeholder="Search" name="srch-term" id="user_search" type="text">
-		    	<div class="input-group-btn pull-left">
-		        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-		    	</div>
-		    </div>
-		</div>
-	</div>
+    </div>
+</div>
     
-    <br>
-    <br>
+    <br><br>
 
+<div class="col-sm-12">
     <table class="table table-bordered table-striped" id="tblSearch">
         <thead>
             <tr>
