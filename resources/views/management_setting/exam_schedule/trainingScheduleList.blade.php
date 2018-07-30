@@ -2,14 +2,14 @@
 @section('page_heading','Training Schedule')
 @section('section')
 <div class="col-sm-12">
-	<div class="col-sm-12" style="padding: 0;">
+	<div class="col-sm-12" style="padding: 0px;">
 
-        <div class="col-sm-3" style="padding: 0;">
+        <div class="col-sm-3" style="padding: 0px;">
             <div class="pull-left">
                 <a href="{{ route('create_training_schedule_view')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Create Training Schedule</a>
             </div>
         </div>
-		<div class="col-sm-9" style="padding: 0;">
+		<div class="col-sm-9" style="padding: 0px;">
 			<div class="input-group add-on" style="width:100%;">
 		    	<input class="form-control" placeholder="Search" name="srch-term" id="user_search" type="text">
 		    	<div class="input-group-btn pull-left">
@@ -33,7 +33,6 @@
                 <th class="">Start Time</th>
                 <th class="">End Time</th>
                 <th class="">List</th>
-                <th class="">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -48,7 +47,6 @@
                     <td>{{ $sche->start_time }}</td>
                     <td>{{ $sche->end_time }}</td>
                     <td><a href="{{ route('schedule_trainee_view', $sche->id) }}">Trainees</a></td>
-                    <td><a href="{{ route('update_training_schedule_view', $sche->id) }}">Update</a></td>
                 </tr>
                 @php($i++)
             @endforeach

@@ -6,6 +6,7 @@ use App\Http\Controllers\Message\ActionMessage;
 use App\Model\IfaManagement\IfaRegistration;
 use App\Model\IfaManagement\FilterOption;
 use App\Http\Controllers\Controller;
+use App\Model\ManagementSetting\ApplicantTraining;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Validator;
@@ -22,6 +23,12 @@ class PartiallyCompleted extends Controller
                             ->orderBy('ifa_reg_id','DESC')
                             ->paginate(15);                            
     	return view('ifa.partialty_completed.partialtyCompleteList',compact('getListValue','getFilterOptionValue'));
+    }
+
+    public function viewApplicationDetails(Request $req){
+
+        $application_details = ApplicantTraining::where('application_no', $req->application_no)->first();
+        return view('ifa.application_deatils',compact('application_details'));
     }
 
     public function getIfaAllValue(Request $request){
