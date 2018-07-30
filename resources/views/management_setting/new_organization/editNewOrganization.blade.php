@@ -8,7 +8,7 @@
 			<div class="col-sm-2">
 				<div class="form-group ">
 					<a href="{{route('organization_view')}}" class="btn btn-primary ">
-					<i class="fa fa-arrow-left"></i> Beck</a>
+					<i class="fa fa-arrow-left"></i> Back</a>
 				</div>
 			</div>
 		</div>
