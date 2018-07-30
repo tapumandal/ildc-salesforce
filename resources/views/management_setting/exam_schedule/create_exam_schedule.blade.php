@@ -15,43 +15,52 @@
         <div class="col-sm-10 col-sm-offset-1">
             <div class="panel panel-default add_body">
                 <div class="panel-body">
-                    <form action="{{route('create_training_schedule_action')}}" method="POST">
+                    <form action="{{route('exam_schedule_create_action')}}" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+
+                        {{--<div class="form-group add_input{{ $errors->has('name') ? ' has-error' : ''}}">--}}
+                            {{--<label class="col-md-4 control-label">--}}
+                                {{--<span class="pull-right">Training Name</span>--}}
+                            {{--</label>--}}
+                            {{--<div class="col-md-6">--}}
+                                {{--<div class="select">--}}
+                                    {{--<select class="form-control" type="select" name="training_name_id" >--}}
+                                        {{--<option value="">Select Training Name</option>--}}
+                                        {{--@foreach($trainingNames as $trainingName)--}}
+                                            {{--<option value="{{ $trainingName->id_training_name }}">{{$trainingName->name}}</option>--}}
+                                        {{--@endforeach--}}
+                                    {{--</select>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
 
 
                         <div class="form-group add_input{{ $errors->has('name') ? ' has-error' : ''}}">
                             <label class="col-md-4 control-label">
-                                <span class="pull-right">Training Name</span>
+                                <span class="pull-right">Exam Name</span>
                             </label>
                             <div class="col-md-6">
-                                <div class="select">
-                                    <select class="form-control" type="select" name="training_name_id" >
-                                        <option value="">Select Training Name</option>
-                                        @foreach($trainingNames as $trainingName)
-                                            <option value="{{ $trainingName->id_training_name }}">{{$trainingName->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <input type="text" class="form-control" name="exam_schedule_name" value="{{ old('exam_schedule_name')  }}" placeholder="Name">
                             </div>
                         </div>
 
-
-
-                        <div class="form-group add_input{{ $errors->has('start_date') ? ' has-error' : ''}}">
+                        <div class="form-group add_input{{ $errors->has('exam_schedule_name') ? ' has-error' : ''}}">
                             <label class="col-md-4 control-label">
-                                <span class="pull-right">Start date</span>
+                                <span class="pull-right">Description</span>
                             </label>
                             <div class="col-md-6">
-                                <input type="date" name="start_date" class="form-control">
+                                <input type="text" class="form-control" name="description" value="{{ old('description')  }}" placeholder="Description">
                             </div>
                         </div>
 
-                        <div class="form-group add_input{{ $errors->has('end_date') ? ' has-error' : ''}}">
+                        <div class="form-group add_input{{ $errors->has('date') ? ' has-error' : ''}}">
                             <label class="col-md-4 control-label">
-                                <span class="pull-right">End date</span>
+                                <span class="pull-right">Date</span>
                             </label>
                             <div class="col-md-6">
-                                <input type="date" name="end_date" class="form-control">
+                                <input type="date" name="date" class="form-control">
                             </div>
                         </div>
 
@@ -74,7 +83,25 @@
                         </div>
 
 
-                        <table class="table table-bordered table-striped" id="tblSearch">
+
+                        <div class="form-group add_input">
+                            <label class="col-md-4 control-label">
+                                <span class="pull-right">Training Schedule</span>
+                            </label>
+                            <div class="col-md-6">
+                                <div class="select">
+                                    <select class="form-control" type="select" name="training_name" >
+                                        <option value="">Select a Schedule</option>
+                                        @foreach($trainingList as $training)
+                                            <option value="{{ $training->id }}">{{ $training->trainingName->name }} ({{ $training->start_date }} - {{ $training->end_date }}) </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <table class="table table-bordered table-striped" id="trainee_list" class="trainee_list">
                             <thead>
                                 <tr>
                                     <th class="">Serial</th>
@@ -87,26 +114,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @php($i =1)
-                                @foreach($applicants as $applicant)
-                                <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>
-                                        {{ $applicant->first_name}} {{ $applicant->last_name}}
-                                        <input type="hidden" name="applicant_no[]" value="{{ $applicant->application_no }}">
-                                    </td>
-                                    <td>{{ $applicant->mobile_no}}</td>
-                                    <td>{{ $applicant->email}}</td>
-                                    <td>{{ $applicant->pre_addr_ps_id }}</td>
-                                    <td>
-                                        <input type="checkbox" value="1" name="training_status[{{ $applicant->application_no }}]">
-                                    </td>
-                                    {{--<td>--}}
-                                        <input type="hidden" value="1" name="is_required[{{ $applicant->application_no }}]" checked>
-                                    {{--</td>--}}
-                                </tr>
-                                @php($i++)
-                                @endforeach
                             </tbody>
                         </table>
                         <div class="form-group add_input">

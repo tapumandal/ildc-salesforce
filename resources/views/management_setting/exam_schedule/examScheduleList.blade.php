@@ -1,94 +1,58 @@
 @extends('layouts.dashboard')
 @section('page_heading','Exam Schedule')
 @section('section')
-<div class="col-sm-3"></div>
-<div class="col-sm-9">
-    <div class="input-group add-on" style="width:100%;">
-        <input class="form-control" placeholder="Search" name="srch-term" id="user_search" type="text">
-        <div class="input-group-btn pull-left">
-        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+    <div class="col-sm-12">
+        <div class="col-sm-12" style="padding: 0px;">
+
+            <div class="col-sm-3" style="padding: 0px;">
+                <div class="pull-left">
+                    <a href="{{ route('exam_schedule_create_view')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Create Exam Schedule</a>
+                </div>
+            </div>
+            <div class="col-sm-9" style="padding: 0px;">
+                <div class="input-group add-on" style="width:100%;">
+                    <input class="form-control" placeholder="Search" name="srch-term" id="user_search" type="text">
+                    <div class="input-group-btn pull-left">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<br><br>
-<div class="col-sm-12">
-    <table class="table table-bordered table-striped" id="tblSearch">
-        <thead>
+
+        <br>
+        <br>
+
+        <table class="table table-bordered table-striped" id="tblSearch">
+            <thead>
+
             <tr>
                 <th class="">Serial</th>
-                <th class="">First Name</th>
-                <th class="">Last Name</th>
-                <th class="">Email</th>
-                <th class="">Date of Birth</th>
-                <th class="">Nationality</th>
-                <th class="">National ID Card No.</th>
+                <th class="">Exam Name</th>
+                <th class="">Description</th>
+                <th class="">Date</th>
+                <th class="">Start Time</th>
+                <th class="">End Time</th>
+                <th class="">List</th>
+                <th class="">Action</th>
             </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td> Md Arif</td>
-                <td> Islam</td>
-                <td>arif90@gmail.com</td>                  
-                <td>16/09/1996</td>                  
-                <td>Bangladeshi</td>                  
-                <td>190400789009</td>                  
-            </tr>
-            <tr>
-                <td>2</td>
-                <td> Md.Malek</td>
-                <td> Ahmed</td>
-                <td>malekahmed69@gmail.com</td>                  
-                <td>04/01/1997</td>                  
-                <td>Bangladeshi</td>                  
-                <td>1900000789010</td>                  
-            </tr>
-            <tr>
-                <td>3</td>
-                <td> Md Monsur</td>
-                <td>Ali</td>
-                <td>monsur@gmail.com</td>                  
-                <td>16/12/1997</td>                  
-                <td>Bangladeshi</td>                  
-                <td>1900040789011</td>                  
-            </tr>
-            <tr>
-                <td>4</td>
-                <td> Md Abdul</td>
-                <td> Ajat</td>
-                <td>Abdul@gmail.com</td>                  
-                <td>16/12/1997</td>                  
-                <td>Bangladeshi</td>                  
-                <td>1900000789001</td>                  
-            </tr>
-            <tr>
-                <td>5</td>
-                <td> Abdul</td>
-                <td> Hakim</td>
-                <td>hakim55@gmail.com</td>                  
-                <td>30/05/1977</td>                  
-                <td>Bangladeshi</td>                  
-                <td>1907000789081</td>                  
-            </tr>
-            <tr>
-                <td>6</td>
-                <td> Newoaz</td>
-                <td> Uddin</td>
-                <td>newoaz76@gmail.com</td>                  
-                <td>16/03/1996</td>                  
-                <td>Bangladeshi</td>                  
-                <td>1900830789001</td>                  
-            </tr>
-            <tr>
-                <td>7</td>
-                <td> Md Motaleb</td>
-                <td> Rahman</td>
-                <td>motaleb666@gmail.com</td>                  
-                <td>12/01/1989</td>                  
-                <td>Bangladeshi</td>                  
-                <td>1800470078001</td>                  
-            </tr>
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+            @php($i=1)
+            @foreach($examList as  $exam)
+
+                <tr>
+                    <td>{{$i}}</td>
+                    <td>{{ $exam->exam_schedule_name  }}</td>
+                    <td>{{ $exam->description  }}</td>
+                    <td>{{ $exam->date }}</td>
+                    <td>{{ $exam->start_time }}</td>
+                    <td>{{ $exam->end_time }}</td>
+                    <td><a href="{{ route('schedule_exameen_view', $exam->id) }}">Exameen</a></td>
+                    <td><a href="{{ route('update_exam_schedule_view', $exam->id) }}">Update</a></td>
+                </tr>
+                @php($i++)
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

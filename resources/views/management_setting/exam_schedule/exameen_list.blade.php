@@ -5,27 +5,25 @@
 <div class="col-sm-12">
 
     <div class="col-sm-12" style="padding-left: 0px;">
-        <h2 >Training Schedule</h2>
+        <h2 >Exam Schedule</h2>
         <hr>
     </div>
 
     <table class="table table-bordered table-striped" id="tblSearch">
         <thead>
         <tr>
-            <th class="">Training Name</th>
+            <th class="">Exam Schedule</th>
             <th class="">Start Date</th>
-            <th class="">End date</th>
             <th class="">Time</th>
             <th class="">Description</th>
         </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{ $schedule->trainingName->name }}</td>
-                <td>{{ $schedule->start_date }}</td>
-                <td>{{ $schedule->end_date }}</td>
+                <td>{{ $schedule->exam_schedule_name }}</td>
+                <td>{{ $schedule->date }}</td>
                 <td>{{ $schedule->start_time }} - {{ $schedule->end_time }}</td>
-                <td>{{ $schedule->trainingName->description }}</td>
+                <td>{{ $schedule->description }}</td>
             </tr>
 
         </tbody>
@@ -34,12 +32,12 @@
 
 
     <div class="col-sm-12" style="padding-left: 0px;">
-        <h2 style="float: left;">Trainee List</h2>
-            <div class="col-sm-3" style="  padding: 0px;  padding-left: 20px; margin-top: 20px;">
-                <div class="pull-left">
-                    <a href="{{ route('schedule_trainee_add_view', $schedule->id)}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Trainee</a>
-                </div>
+        <h2 style="float: left;" >Exameen List</h2>
+        <div class="col-sm-3" style="  padding: 0px;  padding-left: 20px; margin-top: 20px;">
+            <div class="pull-left">
+                <a href="{{ route('schedule_exameen_update_view', $schedule->id)}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add Exameen</a>
             </div>
+        </div>
         <hr style="float: left; width: 100%;">
     </div>
 
@@ -57,15 +55,15 @@
         </thead>
         <tbody>
         @php($i=1)
-        @foreach($trainees as  $trainee)
+        @foreach($exameen as  $exameen)
 
                 <tr>
                     <td>{{$i}}</td>
-                    <td>{{ $trainee->trainee->first_name }} {{ $trainee->trainee->last_name }}</td>
-                    <td>{{ $trainee->trainee->mobile_no }}</td>
-                    <td>{{ $trainee->trainee->email }}</td>
-                    <td>{{ $trainee->trainee->thana }}</td>
-                    <td><a href="{{ route('trainee_remove_action', [$schedule->id, $trainee->trainee->application_no]) }}">Remove</a></td>
+                    <td>{{ $exameen->exameen->first_name }} {{ $exameen->exameen->last_name }}</td>
+                    <td>{{ $exameen->exameen->mobile_no }}</td>
+                    <td>{{ $exameen->exameen->email }}</td>
+                    <td>{{ $exameen->exameen->pre_addr_ps_id }}</td>
+                    <td><a href="{{ route('exameen_remove_action', [$schedule->id, $exameen->exameen->application_no]) }}">Remove</a></td>
                 </tr>
                 @php($i++)
         @endforeach

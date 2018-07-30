@@ -76,6 +76,7 @@
                         <th class="">Email</th>
                         <th class="">Brithday</th>
                         <th class="">Nationality</th>
+                        <th class="">Action</th>
                     </tr>
                 </thead>
                 <tbody id="ifa_list_tbody">
@@ -89,6 +90,9 @@
                             <td>{{$value->email}}</td>
                             <td>{{$value->date_of_birth}}</td>
                             <td>{{$value->nationality}}</td>
+                            <td>
+                                <a href="{{ route('application_details_view', $value->application_no) }}">View</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

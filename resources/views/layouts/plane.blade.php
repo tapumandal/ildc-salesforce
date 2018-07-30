@@ -44,6 +44,7 @@
 	<script type="text/javascript" src="{{ asset('js/all_product_table.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/journal.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/new_saleforces.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/new_saleforces_extended.js') }}"></script>
 
 </body>
 </html>

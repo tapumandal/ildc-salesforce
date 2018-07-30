@@ -29,6 +29,11 @@ Route::group(['middleware' => 'auth'], function () {
 				'uses' => 'ifa\PartiallyCompleted@viewPartiallyCompleted'
 			]);
 
+		Route::get('applicant/{application_no?}/details', [
+				'as' => 'application_details_view',
+				'uses' => 'ifa\PartiallyCompleted@viewApplicationDetails'
+			]);
+
 		Route::get('application/in/progress', [
 				'as' => 'application_in_progress_view',
 				'uses' => 'ifa\ApplicationProgress@viewApplicationProgress'
