@@ -469,6 +469,7 @@ class ComposerStaticInit3dafe5c6ef3bcfb747c403b80f060381
         'Collective\\Html\\HtmlBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlBuilder.php',
         'Collective\\Html\\HtmlFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlFacade.php',
         'Collective\\Html\\HtmlServiceProvider' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlServiceProvider.php',
+
         'CreateApprovedTraineesTable' => __DIR__ . '/../..' . '/database/Untitled Folder 2/2018_07_28_131355_create_approved_trainees_table.php',
         'CreateCompaniesTable' => __DIR__ . '/../..' . '/database/Untitled Folder/2018_01_25_130557_create_companies_table.php',
         'CreateIfaManagementMenuOption' => __DIR__ . '/../..' . '/database/Untitled Folder 2/2018_07_28_071350_create_ifa_management_menu_option.php',
@@ -481,13 +482,31 @@ class ComposerStaticInit3dafe5c6ef3bcfb747c403b80f060381
         'CreateNewRatingTable' => __DIR__ . '/../..' . '/database/Untitled Folder 2/2018_07_27_064006_create_new_rating_table.php',
         'CreatePremiseOwnershipTable' => __DIR__ . '/../..' . '/database/Untitled Folder 2/2018_07_21_084250_create_premise_ownership_table.php',
         'CreateSdsddsdsd' => __DIR__ . '/../..' . '/database/Untitled Folder 2/2018_07_28_112942_create_sdsddsdsd.php',
+
+        'CreateApprovedTraineesTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_28_131355_create_approved_trainees_table.php',
+        'CreateCompaniesTable' => __DIR__ . '/../..' . '/database/Untitled Folder/2018_01_25_130557_create_companies_table.php',
+        'CreateIfaManagementMenuOption' => __DIR__ . '/../..' . '/database/migrations/2018_07_28_071350_create_ifa_management_menu_option.php',
+        'CreateInProgressApplicantList' => __DIR__ . '/../..' . '/database/migrations/2018_07_28_105328_create_in_progress_applicant_list.php',
+        'CreateNationalityTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_21_074212_create_nationality_table.php',
+        'CreateNewOccupationTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_27_063855_create__new_occupation_table.php',
+        'CreateNewOrganizationTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_27_052908_create__new_organization_table.php',
+        'CreateNewRatingTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_27_064006_create_new_rating_table.php',
+        'CreatePremiseOwnershipTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_21_084250_create_premise_ownership_table.php',
+        'CreateSdsddsdsd' => __DIR__ . '/../..' . '/database/migrations/2018_07_28_112942_create_sdsddsdsd.php',
+
         'CreateStoreProGetCompanyByGroupId' => __DIR__ . '/../..' . '/database/Untitled Folder/2018_01_26_075012_create_store_pro_get_company_by_group_id.php',
         'CreateStoreProGetRolesByCompanyId' => __DIR__ . '/../..' . '/database/Untitled Folder/2018_01_27_130037_create_store_pro_get_roles_by_company_id.php',
         'CreateStoreProGetUserMenuByRole' => __DIR__ . '/../..' . '/database/Untitled Folder/2018_01_29_124553_create_store_pro_get_user_menu_by_role.php',
         'CreateStoreProGetUserMenuByRolegetPermission' => __DIR__ . '/../..' . '/database/Untitled Folder/2018_01_29_125120_create_store_pro_get_user_menu_by_roleget_permission.php',
+
         'CreateTrainingNameTable' => __DIR__ . '/../..' . '/database/Untitled Folder 2/2018_07_27_063933_create_training_name_table.php',
         'CreateTrainingSchedulesTable' => __DIR__ . '/../..' . '/database/Untitled Folder 2/2018_07_28_074722_create_training_schedules_table.php',
         'CreateUserTypeTable' => __DIR__ . '/../..' . '/database/Untitled Folder 2/2018_07_21_111424_create_user_type_table.php',
+
+        'CreateTrainingNameTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_27_063933_create_training_name_table.php',
+        'CreateTrainingSchedulesTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_28_074722_create_training_schedules_table.php',
+        'CreateUserTypeTable' => __DIR__ . '/../..' . '/database/migrations/2018_07_21_111424_create_user_type_table.php',
+
         'Cron\\AbstractField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/DayOfMonthField.php',

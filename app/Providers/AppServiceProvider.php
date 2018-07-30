@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 use Validator;
 use DB;
@@ -66,6 +67,7 @@ class AppServiceProvider extends ServiceProvider
     }
     return $tr==1;
   });
+  Schema::defaultStringLength(191);
 }
 
   /**

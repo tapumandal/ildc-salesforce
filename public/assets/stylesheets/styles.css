@@ -9124,6 +9124,7 @@ span.req_star{
   border-radius: 3px;
 }
 
+
 .main_body .add_body .input_title{
   padding-bottom: 10px;
 }
@@ -9140,3 +9141,11 @@ span.req_star{
 .has-error .help-block{
   clear :both;
 }
+
+.tablehead_0 {
+    display: none !important;
+}
+.table_data_0 {
+    display: none !important;
+}
+

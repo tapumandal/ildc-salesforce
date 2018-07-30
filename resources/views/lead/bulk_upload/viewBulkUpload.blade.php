@@ -29,7 +29,7 @@
 					 	<span class="pull-right" style="padding-top: 8px">Prefered File Format :</span>
 					</label>
 					<div class="col-sm-6">
-						<a href="{{ asset('excel/prefered_format.xlsx')}}" class="btn btn-default">Download excel <i class="fa fa-download"></i></a>
+						<a href="{{ asset('excel/ifa.xlsx')}}" class="btn btn-default">Download excel <i class="fa fa-download"></i></a>
 					</div>
 				</div>
 			</div>
