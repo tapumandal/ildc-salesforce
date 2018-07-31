@@ -30,11 +30,13 @@
 						<div class="col-sm-4">
 							<select class="form-control selections" name="institution" id="institution">
 								<option value="0">Select Insititution</option>
-								<option value="1">Insititution 1</option>
-								<option value="2">Insititution 2</option>
-								<option value="3">Insititution 3</option>
-								<option value="4">Insititution 4</option>
-								<option value="5">Insititution 5</option>
+								<?php 
+									if(isset($institutions) && !empty($institutions)){
+										foreach ($institutions as $institution) {
+											print '<option value="'.$institution->id_organization.'">'.$institution->organization_name.'</option>';
+										}
+									}
+								?>
 							</select>
 						</div>
 					</div>
