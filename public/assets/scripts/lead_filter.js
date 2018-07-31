@@ -47,7 +47,6 @@ var leadCreateListFilterSearch = (function(){
 		          async: false,
 		          success: function(result) {
 		          	var data = JSON.parse(result);
-		          	console.log(data);
 		          	addRow(data,0);
 		          },
 		          error:function(result){
@@ -104,7 +103,7 @@ function addRow(results, start)
     });
     if( end == 0){
     	$('#lead_list_tbody').append(
-    		'<tr class="lead_list_tbody"><td colspan="7" > <center><span style="padding:50px;">Empty Value</span></center> </td> </tr>'
+    		'<tr class="lead_list_tbody"><td colspan="8" > <center><span style="padding:50px;">Empty Value</span></center> </td> </tr>'
     		);
     }else{
 	    for (var i = start; i < end; i++)
@@ -116,7 +115,8 @@ function addRow(results, start)
 	            '</td><td>'+ emptyCheck(rows[i].follow_up_date) +
 	            '</td><td>'+ emptyCheck(rows[i].remark_or_comment) +
 	            '</td><td>'+ emptyCheck(rows[i].name) +
-	            '</td></tr>');
+	            '</td><td><table><tr><td><a href="/edit/lead/'+rows[i].id_create_lead+'" class="btn btn-primary">Edit</a></td><td><a href="/view/lead/'+rows[i].id_create_lead+'" class="btn btn-success">View</a></td></tr></table></td></tr>');
+	           
 	        sl++;
 	    }
 	}
