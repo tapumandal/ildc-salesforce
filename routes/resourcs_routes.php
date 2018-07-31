@@ -203,6 +203,11 @@ Route::group(['middleware' => 'auth'], function () {
 				'uses' => 'SalesAgent\BulkUploadController@bulkUploadAction'
 			]);
 
+		Route::post('lead/bulk/uploadaction', [
+				'as' => 'lead_bulk_upload_action',
+				'uses' => 'SalesAgent\BulkUploadController@leadBulkUploadAction'
+			]);
+
 		Route::get('sales/store/bulk/upload', [
 				'as' => 'sales_store_bulk_upload',
 				'uses' => 'SalesAgent\BulkUploadController@storeBulk'
