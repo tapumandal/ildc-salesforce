@@ -25,8 +25,9 @@ $('select[name=training_name]').on('change', function(){
             console.log(result);
 
             $.each( result, function( key, value ) {
-
-                $('#trainee_list tr:last').after('<tr>' +
+                console.log(value);
+                if(value.pass_trainee != null){
+                    $('#trainee_list tr:last').after('<tr>' +
                                 '<td>'+(key+1)+'</td>'+
                                 '<td>'+value.pass_trainee.first_name+'</td>'+
                                 '<td>'+value.pass_trainee.mobile_no+'</td>'+
@@ -37,6 +38,7 @@ $('select[name=training_name]').on('change', function(){
                                     '<input type="hidden" name="applicant_no[]" value="'+value.pass_trainee.application_no+'">'+
                                 '</td>'+
                             '</tr>');
+                }
             });
         },
         error: function(){
