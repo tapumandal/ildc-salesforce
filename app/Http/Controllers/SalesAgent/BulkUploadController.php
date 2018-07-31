@@ -19,7 +19,8 @@ use DateTime;
 class BulkUploadController extends Controller
 {
     public function bulkUploadView(){
-    	return view('sales_agent.bulk_upload.viewBulkUpload');
+    	$institutions = $ocupations_ = DB::table('tbl_new_organization')->where('is_active', 1)->get();
+    	return view('sales_agent.bulk_upload.viewBulkUpload',['institutions' => $institutions]);
     }
     public function bulkUploadAction(Request $request){
 
