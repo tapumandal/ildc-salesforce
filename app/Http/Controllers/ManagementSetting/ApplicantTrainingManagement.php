@@ -11,11 +11,15 @@ use App\Model\ManagementSetting\TrainingSchedule;
 class ApplicantTrainingManagement extends Controller
 {
     public function applicantList($appStatus){
-        return ApplicantTraining::orderBy('pre_addr_ps_id', 'ASC')->where(strtolower('application_status'), strtolower($appStatus))->get();
+        return ApplicantTraining::orderBy('pre_addr_ps_id', 'ASC')->where(strtolower('application_status'), strtolower($appStatus))->where('application_status', 'InProgress')->get();
     }
 
     public function scheduledTraineeList(Request $req){
         return ApprovedTrainee::with('trainee')->where('training_schedule_id', $req->schedule_id)->get();
+    }
+
+    public function scheduledPassTraineeList(Request $req){
+        return ApprovedTrainee::with('pass_trainee')->where('training_schedule_id', $req->schedule_id)->get();
     }
 
     public function setTraineeSchedule(Request $request, $scheduleId)
@@ -74,6 +78,29 @@ class ApplicantTrainingManagement extends Controller
         \Session::flash('alert-class','alert-success');
 
         return redirect()->route('schedule_trainee_view', $req->schedule_id);
+    }
+
+    public function trainingStatus(Request $req){
+
+        foreach ($req->training_status as $applicant_no => $resStatus){
+                ApplicantTraining::where('application_no', $applicant_no)->update(['training_status' => $resStatus]);
+
+                $applicantDetails = ApplicantTraining::where('application_no', $applicant_no)->first();
+                $mailPerInfo = [
+                    'email' => $applicantDetails->email,
+                    'name' => $applicantDetails->first_name.' '.$applicantDetails->middle_name.' '.$applicantDetails->last_name,
+                    'subject' => 'Application Rejecttion',
+                    'mobile_no' => $applicantDetails->mobile_no,
+                    'application_number' => mt_rand(100000, 999999),
+                ];        
+                // SendingEmail::Send('emails.ifa_registration', $mailPerInfo);
+        }
+
+        \Session::flash('exam_status','Training status successfully changed.');
+        \Session::flash('alert-class','alert-success');
+
+        return redirect()->back();
+
     }
 
 }

@@ -8,6 +8,6 @@ use App\Model\ManagementSetting\ApplicantTraining;
 class ApprovedExameen extends Model
 {
     public function exameen(){
-        return $this->hasOne(ApplicantTraining::class, 'application_no', 'applicant_no');
+        return $this->hasOne(ApplicantTraining::class, 'application_no', 'applicant_no')->where('training_status', 'TrainingPass');
     }
 }

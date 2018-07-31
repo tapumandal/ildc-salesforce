@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Validator;
 use Auth;
 use DB;
+use App\Mylibs\SendingEmail;
 
 class PartiallyCompleted extends Controller
 {
@@ -35,7 +36,23 @@ class PartiallyCompleted extends Controller
     }
 
     public function nidVaidate(Request $req){
-        ApplicantTraining::where('application_no', $req->application_no)->update(['nid_validation_status' => $req->status]);
+
+        
+        if($req->status == 'Valid'){ $appStatus = 'InProgress'; }
+        else if($req->status == 'InValid'){ $appStatus = 'Rejected'; }
+
+        ApplicantTraining::where('application_no', $req->application_no)->update(['nid_validation_status' => $req->status, 'application_status' => $appStatus]);
+
+        $applicantDetails = ApplicantTraining::where('application_no', $req->application_no)->first();
+        $mailPerInfo = [
+            'email' => $applicantDetails->email,
+            'name' => $applicantDetails->first_name.' '.$applicantDetails->middle_name.' '.$applicantDetails->last_name,
+            'subject' => 'Application Rejecttion',
+            'mobile_no' => $applicantDetails->mobile_no,
+            'application_number' => mt_rand(100000, 999999),
+        ];        
+        // SendingEmail::Send('emails.ifa_registration', $mailPerInfo);
+
         return redirect()->back();
     }
 

@@ -28,13 +28,13 @@ $('select[name=training_name]').on('change', function(){
 
                 $('#trainee_list tr:last').after('<tr>' +
                                 '<td>'+(key+1)+'</td>'+
-                                '<td>'+value.trainee.first_name+'</td>'+
-                                '<td>'+value.trainee.mobile_no+'</td>'+
-                                '<td>'+value.trainee.email+'</td>'+
-                                '<td>'+value.trainee.per_addr_ps_id+'</td>'+
+                                '<td>'+value.pass_trainee.first_name+'</td>'+
+                                '<td>'+value.pass_trainee.mobile_no+'</td>'+
+                                '<td>'+value.pass_trainee.email+'</td>'+
+                                '<td>'+value.pass_trainee.per_addr_ps_id+'</td>'+
                                 '<td>' +
-                                    '<input class="trainint_applicant_no" type="checkbox" value="1" name="exam_status['+value.trainee.application_no+']">' +
-                                    '<input type="hidden" name="applicant_no[]" value="'+value.trainee.application_no+'">'+
+                                    '<input class="trainint_applicant_no" type="checkbox" value="1" name="exam_status['+value.pass_trainee.application_no+']">' +
+                                    '<input type="hidden" name="applicant_no[]" value="'+value.pass_trainee.application_no+'">'+
                                 '</td>'+
                             '</tr>');
             });
@@ -66,4 +66,13 @@ $('#all_exameen_pass').on('click', function(){
 
 $('#select_all_trainee_applicant').on('click', function(){
     $('.trainint_applicant_no').prop('checked', true);
+});
+
+
+$('#all_trainee_fail').on('click', function(){
+    $('.training_fail_status').prop('checked', true);
+});
+
+$('#all_trainee_pass').on('click', function(){
+    $('.training_pass_status').prop('checked', true);
 });

@@ -48,7 +48,8 @@
             </div>
         <hr style="float: left; width: 100%;">
     </div>
-
+    <form action="{{ route('change_trainee_training_status_action', $schedule->id) }}" method="post">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <table class="table table-bordered table-striped" id="tblSearch">
         <thead>
             <tr>
@@ -58,24 +59,48 @@
                 <th class="">Mobile No</th>
                 <th class="">Email</th>
                 <th class="">Thana</th>
+                <th class="">Exam Status</th>
                 <th class="">Action</th>
             </tr>
         </thead>
         <tbody>
         @php($i=1)
         @foreach($trainees as  $trainee)
-
+            @if(isset($trainee->trainee))
                 <tr>
                     <td>{{$i}}</td>
                     <td>{{ $trainee->trainee->first_name }} {{ $trainee->trainee->last_name }}</td>
                     <td>{{ $trainee->trainee->mobile_no }}</td>
                     <td>{{ $trainee->trainee->email }}</td>
                     <td>{{ $trainee->trainee->thana }}</td>
+                    <td>
+                        <label class="radio-inline">
+                            <input type="radio" class="training_pass_status" name="training_status[{{ $trainee->trainee->application_no }}]" value="TrainingPass" @if($trainee->trainee->training_status == 'TrainingPass')checked @endif>Pass
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" class="training_fail_status" name="training_status[{{ $trainee->trainee->application_no }}]" value="TrainingFail" @if($trainee->trainee->training_status == 'TrainingFail')checked @endif>Fail
+                        </label>
+                    </td>
                     <td><a href="{{ route('trainee_remove_action', [$schedule->id, $trainee->trainee->application_no]) }}">Remove</a></td>
                 </tr>
                 @php($i++)
+            @endif
         @endforeach
         </tbody>
     </table>
+    <div class="col-sm-12" style="  padding: 0px;  padding-left: 20px; margin-top: 20px;">
+            <div class="col-sm-12" style="  padding: 0px;  padding-left: 20px; margin-top: 20px; padding-bottom: 10px;">
+                <div class="pull-right" style="">
+                    <a id="all_trainee_fail" style="background: red; border: red;" href="javascript:void(0)" class="btn btn-primary">All Fail</a>
+                </div>
+                <div class="pull-right" style="padding-right: 15px; ">
+                    <a id="all_trainee_pass" href="javascript:void(0)" class="btn btn-primary">All Pass</a>
+                </div>
+            </div>
+            <div class="pull-right">
+                <button type="submit"  class="btn btn-primary">Change Training Status</button>
+            </div>
+        </div>
+    </form>
 </div>
 @endsection
