@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Model\Lead\CreateLead;
 use DB;
 
 class HomeController extends Controller {
@@ -41,9 +43,9 @@ class HomeController extends Controller {
 			foreach ($menus as $key => $value) {
 
 				$child_menu = DB::select('call get_child_menu_list("' . $value->menu_id . '","' . $user_role_id . '","' . $company_id . '")');
-                    $lower=strtolower($value->name);
-                    $final_key=str_replace(' ', '_', $lower);
-                    $menu_trans=trans("others.mxp_menu_"."$final_key");
+				$lower = strtolower($value->name);
+				$final_key = str_replace(' ', '_', $lower);
+				$menu_trans = trans("others.mxp_menu_" . "$final_key");
 				if (!empty($child_menu)) {
 
 					$menus_array[$i]['name'] = $menu_trans;
@@ -52,9 +54,9 @@ class HomeController extends Controller {
 					$menus_array[$i]['menu_id'] = $value->menu_id;
 					$j = 0;
 					foreach ($child_menu as $cm) {
-						$lower_sub=strtolower($cm->name);
-                        $final_key_sub=str_replace(' ', '_', $lower_sub);
-                        $menu_trans_sub=trans("others.mxp_menu_"."$final_key_sub");
+						$lower_sub = strtolower($cm->name);
+						$final_key_sub = str_replace(' ', '_', $lower_sub);
+						$menu_trans_sub = trans("others.mxp_menu_" . "$final_key_sub");
 						$menus_array[$i]['subMenu'][$j]['name'] = $menu_trans_sub;
 						$menus_array[$i]['subMenu'][$j]['route_name'] = $cm->route_name;
 						$menus_array[$i]['subMenu'][$j]['order_id'] = $cm->order_id;
@@ -121,6 +123,46 @@ class HomeController extends Controller {
 		// die();
 
 		session()->put('UserMenus', $menus_array);
-		return view('dashboard');
+
+		$totalLeadValue = CreateLead::count();
+		$highly_interested = $this->highlyInterested();
+		$unassigned = $this->unassigned();
+		$converted = $this->converted();
+		$conversion_ratio = $this->conversionRatio();
+		$might_invest = $this->mightInvest();
+		$interested = $this->interested();
+		return view('dashboard',
+			compact(
+				"totalLeadValue", 'highly_interested', 'unassigned', 'converted', 'conversion_ratio', 'might_invest', 'interested'));
+	}
+
+	protected function highlyInterested() {
+		$value = CreateLead::where('interest_label', 'highly_interested')->count();
+
+		return $value;
+	}
+	protected function unassigned() {
+		$value = CreateLead::where('interest_label', 'unassigned')->count();
+		return $value;
+	}
+	protected function converted() {
+		$value = CreateLead::where('interest_label', 'converted')->count();
+
+		return $value;
+	}
+	protected function conversionRatio() {
+		$value = CreateLead::where('interest_label', 'conversion_ratio')->count();
+
+		return $value;
+	}
+	protected function mightInvest() {
+		$value = CreateLead::where('interest_label', 'might_invest')->count();
+
+		return $value;
+	}
+	protected function interested() {
+		$value = CreateLead::where('interest_label', 'interested')->count();
+
+		return $value;
 	}
 }
