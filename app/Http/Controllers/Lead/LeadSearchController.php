@@ -24,6 +24,21 @@ class LeadSearchController extends Controller
         return json_encode($data);
     }
 
+    public function getIfaValue(Request $request){
+
+        $results = array();
+        $orderDetails = DB::select("SELECT `application_no`,`first_name` FROM `tbl_ifa_registrations` order by `application_no` DESC ");
+
+        if(isset($orderDetails) && !empty($orderDetails)){
+            foreach ($orderDetails as $orderKey => $orderValue) {
+                $results[]['name'] = $orderValue->application_no.'-'.$orderValue->first_name;
+                // $results[]['application_no'] = $orderValue->application_no;
+            }
+        }
+
+      return json_encode($results);
+    }
+
     public function getLeadSearchValue(Request $request){
     	$values = $request->all();
 
