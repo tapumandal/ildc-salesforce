@@ -25,7 +25,7 @@
                             </label>
                             <div class="col-md-6">
                                 <div class="select">
-                                    <select class="form-control" type="select" name="training_name_id" >
+                                    <select class="form-control" type="select" name="training_name_id"  required>
                                         <option value="">Select Training Name</option>
                                         @foreach($trainingNames as $trainingName)
                                             <option value="{{ $trainingName->id_training_name }}">{{$trainingName->name}}</option>
@@ -34,7 +34,6 @@
                                 </div>
                             </div>
                         </div>
-
 
 
                         <div class="form-group add_input{{ $errors->has('start_date') ? ' has-error' : ''}}">
@@ -99,10 +98,10 @@
                                     <td>{{ $applicant->email}}</td>
                                     <td>{{ $applicant->pre_addr_ps_id }}</td>
                                     <td>
-                                        <input type="checkbox" value="1" name="training_status[{{ $applicant->application_no }}]">
+                                        <input class="trainint_applicant_no" type="checkbox" value="1" name="training_status[{{ $applicant->application_no }}]">
                                     </td>
                                     {{--<td>--}}
-                                        <input type="hidden" value="1" name="is_required[{{ $applicant->application_no }}]" checked>
+                                        <input type="hidden"  value="1" name="is_required[{{ $applicant->application_no }}]" checked>
                                     {{--</td>--}}
                                 </tr>
                                 @php($i++)
@@ -110,6 +109,9 @@
                             </tbody>
                         </table>
                         <div class="form-group add_input">
+                            <div class="col-md-2 col-md-offset-10" style=" padding-bottom: 10px; padding-right: 0px; ">
+                                <a style="width: 100%;" id="select_all_trainee_applicant" href="javascript:void(0)" class="btn btn-primary">Select All</a>
+                            </div>
                             <div class="col-md-2 col-md-offset-10" style="padding-right: 0px;">
                                 <button type="submit" class="btn btn-primary" style="width:100%">Submit
                                 </button>

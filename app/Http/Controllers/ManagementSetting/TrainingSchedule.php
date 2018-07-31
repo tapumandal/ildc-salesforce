@@ -36,6 +36,8 @@ class TrainingSchedule extends Controller
 
     public function trainingScheduleCreateAction(Request $req){
 
+
+
         $allInput = $req->all();
         unset($allInput['_token']);
 
@@ -56,6 +58,9 @@ class TrainingSchedule extends Controller
         $traineeApp = new ApplicantTrainingManagement();
 
         $traineeApp->setTraineeSchedule($req, $trainingScheId);
+
+        \Session::flash('exam_status','Training schedule created successfully.');
+        \Session::flash('alert-class','alert-success');
 
         return redirect()->route('training_schedule_view');
     }
@@ -83,6 +88,9 @@ class TrainingSchedule extends Controller
         $trainingSch->is_delete = 0;
         $trainingSch->is_complete = 0;
         $trainingSch->save();
+
+        \Session::flash('exam_status','Training schedule updated successfully.');
+        \Session::flash('alert-class','alert-success');
 
         return redirect()->route('training_schedule_view');
     }

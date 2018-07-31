@@ -33,7 +33,7 @@ $('select[name=training_name]').on('change', function(){
                                 '<td>'+value.trainee.email+'</td>'+
                                 '<td>'+value.trainee.per_addr_ps_id+'</td>'+
                                 '<td>' +
-                                    '<input type="checkbox" value="1" name="exam_status['+value.trainee.application_no+']">' +
+                                    '<input class="trainint_applicant_no" type="checkbox" value="1" name="exam_status['+value.trainee.application_no+']">' +
                                     '<input type="hidden" name="applicant_no[]" value="'+value.trainee.application_no+'">'+
                                 '</td>'+
                             '</tr>');
@@ -62,4 +62,8 @@ $('#all_exameen_fail').on('click', function(){
 
 $('#all_exameen_pass').on('click', function(){
     $('.exameen_pass_status').prop('checked', true);
+});
+
+$('#select_all_trainee_applicant').on('click', function(){
+    $('.trainint_applicant_no').prop('checked', true);
 });

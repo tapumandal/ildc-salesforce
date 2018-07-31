@@ -54,6 +54,10 @@ class ApplicantTrainingManagement extends Controller
     public function traineeRemove(Request $req){
         ApprovedTrainee::where('applicant_no', $req->application_no)->where('training_schedule_id', $req->schedule_id)->delete();
         ApplicantTraining::where('application_no', $req->application_no)->update(['training_status' => 'Cancle']);
+
+        \Session::flash('exam_status','Trainee removed successfully.');
+        \Session::flash('alert-class','alert-danger');
+
         return redirect()->back();
     }
 
@@ -65,6 +69,9 @@ class ApplicantTrainingManagement extends Controller
     public function scheduleTraineeAddAction(Request $req){
 
         $this->setTraineeSchedule($req, $req->schedule_id);
+
+        \Session::flash('exam_status','Trainee added successfully.');
+        \Session::flash('alert-class','alert-success');
 
         return redirect()->route('schedule_trainee_view', $req->schedule_id);
     }
