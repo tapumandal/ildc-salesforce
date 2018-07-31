@@ -27,8 +27,16 @@ class PartiallyCompleted extends Controller
 
     public function viewApplicationDetails(Request $req){
 
-        $application_details = ApplicantTraining::where('application_no', $req->application_no)->first();
+        $application_details = ApplicantTraining::with('pre_district', 'pre_division', 'per_district', 'per_division', 'nationality_info',
+            'bank', 'branch', 'user_type', 'premise_ownership', 'permise_ownership')
+            ->where('application_no', $req->application_no)->first();
+//        return $application_details;
         return view('ifa.application_deatils',compact('application_details'));
+    }
+
+    public function nidVaidate(Request $req){
+        ApplicantTraining::where('application_no', $req->application_no)->update(['nid_validation_status' => $req->status]);
+        return redirect()->back();
     }
 
     public function getIfaAllValue(Request $request){

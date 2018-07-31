@@ -19,13 +19,14 @@
         </tr>
         </thead>
         <tbody>
+            @if(isset($schedule))
             <tr>
                 <td>{{ $schedule->exam_schedule_name }}</td>
                 <td>{{ $schedule->date }}</td>
                 <td>{{ $schedule->start_time }} - {{ $schedule->end_time }}</td>
                 <td>{{ $schedule->description }}</td>
             </tr>
-
+            @endif
         </tbody>
     </table>
 
@@ -55,18 +56,21 @@
         </thead>
         <tbody>
         @php($i=1)
-        @foreach($exameen as  $exameen)
 
-                <tr>
-                    <td>{{$i}}</td>
-                    <td>{{ $exameen->exameen->first_name }} {{ $exameen->exameen->last_name }}</td>
-                    <td>{{ $exameen->exameen->mobile_no }}</td>
-                    <td>{{ $exameen->exameen->email }}</td>
-                    <td>{{ $exameen->exameen->pre_addr_ps_id }}</td>
-                    <td><a href="{{ route('exameen_remove_action', [$schedule->id, $exameen->exameen->application_no]) }}">Remove</a></td>
-                </tr>
-                @php($i++)
-        @endforeach
+            @foreach($exameen as  $exameen)
+                @if(isset($exameen->exameen))
+                    <tr>
+                        <td>{{$i}}</td>
+                        <td>{{ $exameen->exameen->first_name }} {{ $exameen->exameen->last_name }}</td>
+                        <td>{{ $exameen->exameen->mobile_no }}</td>
+                        <td>{{ $exameen->exameen->email }}</td>
+                        <td>{{ $exameen->exameen->pre_addr_ps_id }}</td>
+                        <td><a href="{{ route('exameen_remove_action', [$schedule->id, $exameen->exameen->application_no]) }}">Remove</a></td>
+                    </tr>
+                    @php($i++)
+                @endif
+            @endforeach
+
         </tbody>
     </table>
 </div>
