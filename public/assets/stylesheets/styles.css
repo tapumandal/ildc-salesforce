@@ -9140,3 +9140,7 @@ span.req_star{
 .has-error .help-block{
   clear :both;
 }
+
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"]{
+  margin-left: -32px;
+}

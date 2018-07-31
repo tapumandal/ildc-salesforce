@@ -9,20 +9,23 @@ use App\Model\IfaManagement\IfaRegistration;
 use App\ManagementSetting\ExamSchedule;
 use App\Model\ManagementSetting\ApplicantTraining;
 use App\Model\ManagementSetting\TrainingSchedule;
+use Session;
 
 class ExameenManagement extends Controller
 {
     public function setExameenSchedule(Request $request, $examScheeId){
 
-        foreach ($request->applicant_no as $appNo){
-            if(isset($request->exam_status[$appNo])) {
-                if(count(ApprovedExameen::where('applicant_no', $appNo)->where('exam_schedule_id', $examScheeId)->get()) < 1){
-                    $save = new ApprovedExameen();
-                    $save->exam_schedule_id = $examScheeId;
-                    $save->applicant_no = $appNo;
-                    $save->save();
+        if(isset($request->applicant_no)) {
+            foreach ($request->applicant_no as $appNo) {
+                if (isset($request->exam_status[$appNo])) {
+                    if (count(ApprovedExameen::where('applicant_no', $appNo)->where('exam_schedule_id', $examScheeId)->get()) < 1) {
+                        $save = new ApprovedExameen();
+                        $save->exam_schedule_id = $examScheeId;
+                        $save->applicant_no = $appNo;
+                        $save->save();
 
-                    $this->applicantTrainingStatus($appNo, 'InExam');
+                        $this->applicantTrainingStatus($appNo, 'InExam');
+                    }
                 }
             }
         }
@@ -48,6 +51,9 @@ class ExameenManagement extends Controller
         ApprovedExameen::where('applicant_no', $req->application_no)->where('exam_schedule_id', $req->exam_schedule_id)->delete();
         ApplicantTraining::where('application_no', $req->application_no)->update(['training_status' => 'InTraining']);
 
+        Session::flash('exam_status','Exameen removed successfully.');
+        Session::flash('alert-class','alert-danger');
+
         return redirect()->back();
 
     }
@@ -55,12 +61,29 @@ class ExameenManagement extends Controller
     public function scheduleExameenUpdateView(Request $req){
         $schedule_id = $req->schedule_id;
         $trainingList = TrainingSchedule::with('trainingName')->where('is_complete', 0)->get();
+
+
         return view('management_setting.exam_schedule.add_exameen_exam_schedule', compact('trainingList', 'schedule_id'));
     }
     public function scheduleExameenUpdateAction(Request $req){
 
         $this->setExameenSchedule($req, $req->schedule_id);
 
+        Session::flash('exam_status','Exam schedule successfully.');
+        Session::flash('alert-class','alert-success');
+
         return redirect()->route('schedule_exameen_view', $req->schedule_id);
+    }
+
+    public function examStatus(Request $req){
+
+        foreach ($req->exam_status as $applicant_no => $resStatus){
+                ApplicantTraining::where('application_no', $applicant_no)->update(['training_status' => $resStatus]);
+        }
+
+        Session::flash('exam_status','Exam status successfully changed.');
+        Session::flash('alert-class','alert-success');
+
+        return redirect()->back();
     }
 }
