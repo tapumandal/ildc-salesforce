@@ -85,8 +85,10 @@ return array(
     'App\\Model\\Divisions' => $baseDir . '/app/Model/Divisions.php',
     'App\\Model\\IfaManagement\\FilterOption' => $baseDir . '/app/Model/IfaManagement/FilterOption.php',
     'App\\Model\\IfaManagement\\IfaRegistration' => $baseDir . '/app/Model/IfaManagement/IfaRegistration.php',
+
     'App\\Model\\Lead\\CreateLead' => $baseDir . '/app/Model/Lead/CreateLead.php',
     'App\\Model\\Lead\\InvestmentActionCreateLead' => $baseDir . '/app/Model/Lead/InvestmentActionCreateLead.php',
+
     'App\\Model\\ManagementSetting\\ApplicantTraining' => $baseDir . '/app/Model/ManagementSetting/ApplicantTraining.php',
     'App\\Model\\ManagementSetting\\NewRating' => $baseDir . '/app/Model/ManagementSetting/NewRating.php',
     'App\\Model\\ManagementSetting\\Occupation' => $baseDir . '/app/Model/ManagementSetting/Occupation.php',
@@ -134,6 +136,7 @@ return array(
     'Collective\\Html\\HtmlBuilder' => $vendorDir . '/laravelcollective/html/src/HtmlBuilder.php',
     'Collective\\Html\\HtmlFacade' => $vendorDir . '/laravelcollective/html/src/HtmlFacade.php',
     'Collective\\Html\\HtmlServiceProvider' => $vendorDir . '/laravelcollective/html/src/HtmlServiceProvider.php',
+
     'CreateApprovedTraineesTable' => $baseDir . '/database/Untitled Folder 2/2018_07_28_131355_create_approved_trainees_table.php',
     'CreateCompaniesTable' => $baseDir . '/database/Untitled Folder/2018_01_25_130557_create_companies_table.php',
     'CreateIfaManagementMenuOption' => $baseDir . '/database/Untitled Folder 2/2018_07_28_071350_create_ifa_management_menu_option.php',
@@ -146,13 +149,31 @@ return array(
     'CreateNewRatingTable' => $baseDir . '/database/Untitled Folder 2/2018_07_27_064006_create_new_rating_table.php',
     'CreatePremiseOwnershipTable' => $baseDir . '/database/Untitled Folder 2/2018_07_21_084250_create_premise_ownership_table.php',
     'CreateSdsddsdsd' => $baseDir . '/database/Untitled Folder 2/2018_07_28_112942_create_sdsddsdsd.php',
+
+    'CreateApprovedTraineesTable' => $baseDir . '/database/migrations/2018_07_28_131355_create_approved_trainees_table.php',
+    'CreateCompaniesTable' => $baseDir . '/database/Untitled Folder/2018_01_25_130557_create_companies_table.php',
+    'CreateIfaManagementMenuOption' => $baseDir . '/database/migrations/2018_07_28_071350_create_ifa_management_menu_option.php',
+    'CreateInProgressApplicantList' => $baseDir . '/database/migrations/2018_07_28_105328_create_in_progress_applicant_list.php',
+    'CreateNationalityTable' => $baseDir . '/database/migrations/2018_07_21_074212_create_nationality_table.php',
+    'CreateNewOccupationTable' => $baseDir . '/database/migrations/2018_07_27_063855_create__new_occupation_table.php',
+    'CreateNewOrganizationTable' => $baseDir . '/database/migrations/2018_07_27_052908_create__new_organization_table.php',
+    'CreateNewRatingTable' => $baseDir . '/database/migrations/2018_07_27_064006_create_new_rating_table.php',
+    'CreatePremiseOwnershipTable' => $baseDir . '/database/migrations/2018_07_21_084250_create_premise_ownership_table.php',
+    'CreateSdsddsdsd' => $baseDir . '/database/migrations/2018_07_28_112942_create_sdsddsdsd.php',
+
     'CreateStoreProGetCompanyByGroupId' => $baseDir . '/database/Untitled Folder/2018_01_26_075012_create_store_pro_get_company_by_group_id.php',
     'CreateStoreProGetRolesByCompanyId' => $baseDir . '/database/Untitled Folder/2018_01_27_130037_create_store_pro_get_roles_by_company_id.php',
     'CreateStoreProGetUserMenuByRole' => $baseDir . '/database/Untitled Folder/2018_01_29_124553_create_store_pro_get_user_menu_by_role.php',
     'CreateStoreProGetUserMenuByRolegetPermission' => $baseDir . '/database/Untitled Folder/2018_01_29_125120_create_store_pro_get_user_menu_by_roleget_permission.php',
+
     'CreateTrainingNameTable' => $baseDir . '/database/Untitled Folder 2/2018_07_27_063933_create_training_name_table.php',
     'CreateTrainingSchedulesTable' => $baseDir . '/database/Untitled Folder 2/2018_07_28_074722_create_training_schedules_table.php',
     'CreateUserTypeTable' => $baseDir . '/database/Untitled Folder 2/2018_07_21_111424_create_user_type_table.php',
+
+    'CreateTrainingNameTable' => $baseDir . '/database/migrations/2018_07_27_063933_create_training_name_table.php',
+    'CreateTrainingSchedulesTable' => $baseDir . '/database/migrations/2018_07_28_074722_create_training_schedules_table.php',
+    'CreateUserTypeTable' => $baseDir . '/database/migrations/2018_07_21_111424_create_user_type_table.php',
+
     'Cron\\AbstractField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
     'Cron\\CronExpression' => $vendorDir . '/mtdowling/cron-expression/src/Cron/CronExpression.php',
     'Cron\\DayOfMonthField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/DayOfMonthField.php',

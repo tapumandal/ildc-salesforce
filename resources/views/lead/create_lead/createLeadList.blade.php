@@ -9,7 +9,6 @@
                     <option value=""> Choose a option</option>
                     <option value="highly_interested"> Highly Interested</option>
                     <option value="might_inves"> Might Inves</option>
-                    <option value="might_inves"> Might Inves</option>
                     <option value="not_interested"> Not Interested</option>
 
                 </select>
@@ -72,6 +71,7 @@
                 <th class="">Follow up date</th>
                 <th class="">remarks</th>
                 <th class="">Action</th>
+                <th class="">Status</th>
             </tr>
         </thead>
         <tbody id="lead_list_tbody">
@@ -85,9 +85,33 @@
                     <td>{{$leadsValue->follow_up_date}}</td>
                     <td>{{$leadsValue->remark_or_comment}}</td>
                     <td>{{$leadsValue->name}}</td>
+                    <td>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="{{route('edit_create_lead')}}/{{$leadsValue->id_create_lead}}" class="btn btn-primary"> Edit</a>
+                                    </td>
+
+                                    <td>
+                                        <a href="{{route('view_details_create_lead')}}/{{$leadsValue->id_create_lead}}" class="btn btn-success"> View</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <div class="pagination_body">
+        {{$getCreateLead->links()}}
+    </div>
+
+    <div class="pagination-container">
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
 </div>
 @endsection

@@ -31,8 +31,8 @@
 										<div class="col-sm-12">
 											<select class="form-control" name="lead_type">
 												<option value="">Choose a Option</option>
-												<option value="new_lead"> New Lead</option>
-												<option value="referral_lead"> Referral Lead</option>
+												<option value="new"> New</option>
+												<option value="referral"> Referral</option>
 												
 											</select>
 										</div>
@@ -73,7 +73,7 @@
 											<span class="pull-left">Contact No <span style="color: red;">*</span></span>
 										</label>
 										<div class="col-sm-12">
-											<input type="text" class="form-control" name="contact_no" value="{{ old('contact_no')  }}" placeholder="01*-00-000000" maxlength="11">
+											<input type="text" class="form-control" name="contact_no" value="{{ old('contact_no')  }}" placeholder="01*00" maxlength="11">
 
 											@if($errors->has('contact_no'))
 												<span class="help-block">
@@ -195,7 +195,6 @@
 											<select class="form-control" name="interest_label">
 												<option value=""> Choose a option</option>
 												<option value="highly_interested"> Highly Interested</option>
-												<option value="might_inves"> Might Inves</option>
 												<option value="might_inves"> Might Inves</option>
 												<option value="not_interested"> Not Interested</option>
 											</select>
