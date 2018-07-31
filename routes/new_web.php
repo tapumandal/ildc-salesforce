@@ -29,7 +29,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('schedule/{schedule_id?}/trainee/{application_no}/remove', 'ManagementSetting\ApplicantTrainingManagement@traineeRemove')->name('trainee_remove_action');
         // Data Only
-        Route::get('schedule/{schedule_id?}/trainee/request', 'ManagementSetting\ApplicantTrainingManagement@scheduledTraineeList')->name('scheduled_trainee-list_only_view');
+        Route::get('schedule/{schedule_id?}/trainee/request', 'ManagementSetting\ApplicantTrainingManagement@scheduledPassTraineeList')->name('scheduled_trainee-list_only_view');
+
+        Route::post('schedule/{schedule_id?}/trainee/status', 'ManagementSetting\ApplicantTrainingManagement@trainingStatus')->name('change_trainee_training_status_action');
 
 
         Route::get('exam/schedule/create', 'ManagementSetting\ExamSchedule@scheduleCreateForm')->name('exam_schedule_create_view');
@@ -45,6 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('exam_schedule/{schedule_id?}/exameen/update', 'ManagementSetting\ExameenManagement@scheduleExameenUpdateAction')->name('schedule_exameen_update_action');
 
         Route::post('exam_schedule/{schedule_id?}/exam/status', 'ManagementSetting\ExameenManagement@examStatus')->name('change_exameen_exam_status_action');
+        
+
 
 
         //Application Details nid validation

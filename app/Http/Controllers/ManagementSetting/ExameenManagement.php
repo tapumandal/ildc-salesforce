@@ -79,7 +79,19 @@ class ExameenManagement extends Controller
 
         foreach ($req->exam_status as $applicant_no => $resStatus){
                 ApplicantTraining::where('application_no', $applicant_no)->update(['training_status' => $resStatus]);
+
+            $applicantDetails = ApplicantTraining::where('application_no', $applicant_no)->first();
+            $mailPerInfo = [
+                'email' => $applicantDetails->email,
+                'name' => $applicantDetails->first_name.' '.$applicantDetails->middle_name.' '.$applicantDetails->last_name,
+                'subject' => 'Application Rejecttion',
+                'mobile_no' => $applicantDetails->mobile_no,
+                'application_number' => mt_rand(100000, 999999),
+            ];        
+            // SendingEmail::Send('emails.ifa_registration', $mailPerInfo);
         }
+
+        
 
         Session::flash('exam_status','Exam status successfully changed.');
         Session::flash('alert-class','alert-success');
