@@ -29,12 +29,19 @@ class CreateLeadController extends Controller
     	return view('lead.create_lead.add_create_lead',compact('getOccupation','getInvestmentAction'));
     }
 
-    public function editLeadView(){
-    	return view('lead.create_lead.edit_create_lead');
+    public function editLeadView(InvestmentActionCreateLead $object,$id){
+        $getOccupation = Occupation::get();
+        $getInvestmentAction = InvestmentActionCreateLead::get();
+        $getLeadValue = $object->select('tcl.*','name')
+                        ->join('tbl_create_lead as tcl','tcl.investment_action_id','id_investment_action')
+                        ->where('tcl.id_create_lead',$id)             
+                        ->get();
+    	return view('lead.create_lead.edit_create_lead',compact('getOccupation','getInvestmentAction','getLeadValue'));
     }
 
     public function storeLead(Request $request){
         $datas = $request->all();
+        // $this->print_me($request->lead_type);
     	$validMessages = [
             'personal_name.required' => 'Name field is required.',
             'contact_no.required' => 'Contact no field is required.',
@@ -79,6 +86,56 @@ class CreateLeadController extends Controller
         $storeleads->investment_action_id = $request->investment_action;
         $storeleads->remark_or_comment = $request->remark_or_comment;
         $storeleads->save();
+
+        return \Redirect()->Route('create_lead_view');
+    }
+    public function updateLead(Request $request){
+        $datas = $request->all();
+        // $this->print_me($datas);
+        $validMessages = [
+            'personal_name.required' => 'Name field is required.',
+            'contact_no.required' => 'Contact no field is required.',
+            'contact_no.numeric' => 'Invalid contact number.',
+            'contact_no.min' => 'Minimum 11 digit.',
+            'contact_no.regex' => 'Invalid Contact number (01).',
+            'area.required' => 'Contact no field is required.',
+            'investment_date.required' => 'Date field is required.',
+            'investment_action.required' => 'Action field is required.',
+            ];
+        $validator = Validator::make($datas, 
+            [
+                'personal_name' => 'required',
+                'contact_no' => 'required|numeric|min:11|regex:/(01)[0-9]{9}/',
+                'area' => 'required',
+                'investment_date' => 'required',
+                'investment_action' => 'required',
+            ],
+            $validMessages
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput($request->input())->withErrors($validator->messages());
+        }
+
+        $validationError = $validator->messages();
+        $updateleads = CreateLead::find($request->id);
+        $updateleads->user_id = Auth::user()->user_id;
+        $updateleads->lead_number = $this->leadUniqueNumber();
+        $updateleads->reference_number = $this->referenceNumber();
+        $updateleads->lead_type = $request->lead_type;
+        $updateleads->personal_name = $request->personal_name;
+        $updateleads->contact_no = $request->contact_no;
+        $updateleads->email = $request->email;
+        $updateleads->area = $request->area;
+        $updateleads->occupation_id = $request->occupation;
+        $updateleads->investment_name = $request->investment_name;
+        $updateleads->investment_type = $request->investment_type;
+        $updateleads->follow_up_date = $request->investment_date;
+        $updateleads->contact_status = $request->contact_status;
+        $updateleads->interest_label = $request->interest_label;
+        $updateleads->investment_action_id = $request->investment_action;
+        $updateleads->remark_or_comment = $request->remark_or_comment;
+        $updateleads->save();
 
         return \Redirect()->Route('create_lead_view');
     }
