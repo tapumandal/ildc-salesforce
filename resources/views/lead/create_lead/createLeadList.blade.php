@@ -104,5 +104,14 @@
             @endforeach
         </tbody>
     </table>
+    <div class="pagination_body">
+        {{$getCreateLead->links()}}
+    </div>
+
+    <div class="pagination-container">
+        <nav>
+            <ul class="pagination"></ul>
+        </nav>
+    </div>
 </div>
 @endsection
