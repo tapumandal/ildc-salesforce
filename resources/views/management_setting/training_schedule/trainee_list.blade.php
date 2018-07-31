@@ -59,7 +59,7 @@
                 <th class="">Mobile No</th>
                 <th class="">Email</th>
                 <th class="">Thana</th>
-                <th class="">Exam Status</th>
+                <th class="">Training Status</th>
                 <th class="">Action</th>
             </tr>
         </thead>
@@ -75,7 +75,8 @@
                     <td>{{ $trainee->trainee->thana }}</td>
                     <td>
                         <label class="radio-inline">
-                            <input type="radio" class="training_pass_status" name="training_status[{{ $trainee->trainee->application_no }}]" value="TrainingPass" @if($trainee->trainee->training_status == 'TrainingPass')checked @endif>Pass
+                            <input type="radio" class="training_pass_status" name="training_status[{{ $trainee->trainee->application_no }}]" value="TrainingPass" 
+                            @if($trainee->trainee->training_status == 'TrainingPass' || $trainee->trainee->training_status == 'Pass' || $trainee->trainee->training_status == 'Fail')checked @endif>Pass
                         </label>
                         <label class="radio-inline">
                             <input type="radio" class="training_fail_status" name="training_status[{{ $trainee->trainee->application_no }}]" value="TrainingFail" @if($trainee->trainee->training_status == 'TrainingFail')checked @endif>Fail

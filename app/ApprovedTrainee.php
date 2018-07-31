@@ -13,6 +13,6 @@ class ApprovedTrainee extends Model
     }
 
     public function pass_trainee(){
-        return $this->hasOne(ApplicantTraining::class, 'application_no', 'applicant_no')->where('training_status', 'TrainingPass');
+        return $this->hasOne(ApplicantTraining::class, 'application_no', 'applicant_no')->where('training_status', 'TrainingPass')->orWhere('training_status', 'Pass')->orWhere('training_status', 'Fail');
     }
 }
