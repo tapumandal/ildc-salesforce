@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('exam_schedule/{schedule_id?}/exameen/update', 'ManagementSetting\ExameenManagement@scheduleExameenUpdateView')->name('schedule_exameen_update_view');
         Route::post('exam_schedule/{schedule_id?}/exameen/update', 'ManagementSetting\ExameenManagement@scheduleExameenUpdateAction')->name('schedule_exameen_update_action');
 
+        Route::post('exam_schedule/{schedule_id?}/exam/status', 'ManagementSetting\ExameenManagement@examStatus')->name('change_exameen_exam_status_action');
 
 
         //Application Details nid validation

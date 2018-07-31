@@ -2,6 +2,14 @@
 @section('page_heading','')
 @section('section')
 
+
+
+    @if(Session::has('exam_status'))
+        <div style="width:100%; text-align: center;" class="alert {{ Session::get('alert-class') }}">
+            {{ Session::get('exam_status') }}
+        </div>
+    @endif
+
 <div class="col-sm-12">
 
     <div class="col-sm-12" style="padding-left: 0px;">
@@ -41,7 +49,8 @@
         </div>
         <hr style="float: left; width: 100%;">
     </div>
-
+    <form action="{{ route('change_exameen_exam_status_action', $schedule->id) }}" method="post">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <table class="table table-bordered table-striped" id="tblSearch">
         <thead>
             <tr>
@@ -51,6 +60,7 @@
                 <th class="">Mobile No</th>
                 <th class="">Email</th>
                 <th class="">Thana</th>
+                <th class="">Exam Status</th>
                 <th class="">Action</th>
             </tr>
         </thead>
@@ -65,6 +75,14 @@
                         <td>{{ $exameen->exameen->mobile_no }}</td>
                         <td>{{ $exameen->exameen->email }}</td>
                         <td>{{ $exameen->exameen->pre_addr_ps_id }}</td>
+                        <td>
+                            <label class="radio-inline">
+                                <input type="radio" class="exameen_pass_status" name="exam_status[{{ $exameen->exameen->application_no }}]" value="Pass" @if($exameen->exameen->training_status == 'Pass')checked @endif>Pass
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" class="exameen_fail_status" name="exam_status[{{ $exameen->exameen->application_no }}]" value="Fail" @if($exameen->exameen->training_status == 'Fail')checked @endif>Fail
+                            </label>
+                        </td>
                         <td><a href="{{ route('exameen_remove_action', [$schedule->id, $exameen->exameen->application_no]) }}">Remove</a></td>
                     </tr>
                     @php($i++)
@@ -73,5 +91,19 @@
 
         </tbody>
     </table>
+        <div class="col-sm-12" style="  padding: 0px;  padding-left: 20px; margin-top: 20px;">
+            <div class="col-sm-12" style="  padding: 0px;  padding-left: 20px; margin-top: 20px; padding-bottom: 10px;">
+                <div class="pull-right" style="">
+                    <a id="all_exameen_fail" style="background: red; border: red;" href="javascript:void(0)" class="btn btn-primary">All Fail</a>
+                </div>
+                <div class="pull-right" style="padding-right: 15px; ">
+                    <a id="all_exameen_pass" href="javascript:void(0)" class="btn btn-primary">All Pass</a>
+                </div>
+            </div>
+            <div class="pull-right">
+                <button type="submit"  class="btn btn-primary">Change Exam Status</button>
+            </div>
+        </div>
+    </form>
 </div>
 @endsection

@@ -48,3 +48,18 @@ $('select[name=training_name]').on('change', function(){
 
 
 
+// $('#all_exameen_fail').on('click', function(){
+//     $('input[value=Fail]').attr('checked', true);
+// });
+//
+// $('#all_exameen_pass').on('click', function(){
+//     $('input[value=Pass]').attr('checked', true);
+// });
+
+$('#all_exameen_fail').on('click', function(){
+    $('.exameen_fail_status').prop('checked', true);
+});
+
+$('#all_exameen_pass').on('click', function(){
+    $('.exameen_pass_status').prop('checked', true);
+});

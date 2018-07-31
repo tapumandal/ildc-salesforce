@@ -9142,10 +9142,12 @@ span.req_star{
   clear :both;
 }
 
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"]{
+  margin-left: -32px;
+}
 .tablehead_0 {
     display: none !important;
 }
 .table_data_0 {
     display: none !important;
 }
-

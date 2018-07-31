@@ -12,7 +12,7 @@ use DB;
 use App\ManagementSetting\ExamSchedule as ExamScheduleDetails;
 use App\Http\Controllers\ManagementSetting\ExameenManagement;
 use App\Model\ManagementSetting\TrainingSchedule;
-
+use Session;
 class ExamSchedule extends Controller
 {
     public function viewExamSchedule(){
@@ -30,6 +30,7 @@ class ExamSchedule extends Controller
 
     public function scheduleCreate(Request $req){
 
+
         $allInput = $req->all();
         $examSche = new ExamScheduleDetails();
 
@@ -44,6 +45,9 @@ class ExamSchedule extends Controller
 
         $exameen = new ExameenManagement();
         $exameen->setExameenSchedule($req, $examScheId);
+
+        Session::flash('exam_status','Exam schedule created successfully.');
+        Session::flash('alert-class','alert-success');
 
         return redirect()->route('exam_schedule_view');
     }

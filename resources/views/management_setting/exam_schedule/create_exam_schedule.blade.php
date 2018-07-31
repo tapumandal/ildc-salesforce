@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('page_heading','Create Training Schedule')
+@section('page_heading','Create Exam Schedule')
 @section('section')
     <div class=" col-sm-12 col-sm-offset-0 main_body">
 
