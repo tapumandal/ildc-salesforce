@@ -151,13 +151,19 @@ Route::group(['middleware' => 'auth'], function () {
 				'uses' => 'Lead\CreateLeadController@storeLead'
 			]);
 
-		Route::get('edit/lead', [
+		Route::get('edit/lead/{id?}', [
 				'as' => 'edit_create_lead',
 				'uses' => 'Lead\CreateLeadController@editLeadView'
 			]);
-		Route::post('update/lead', [
+
+		Route::post('update/lead/{id?}', [
 				'as' => 'update_create_lead',
 				'uses' => 'Lead\CreateLeadController@updateLead'
+			]);
+
+		Route::get('view/lead/{id?}', [
+				'as' => 'view_details_create_lead',
+				'uses' => 'Lead\LeadDetailsView@detailsView'
 			]);
 		Route::get('/lead/list/Filter/Value','Lead\LeadSearchController@getLeadSearchValue');
 		Route::get('/lead/list/all/value','Lead\LeadSearchController@getLeadAllValue');
