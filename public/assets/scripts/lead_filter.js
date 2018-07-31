@@ -195,7 +195,69 @@ var leadCreateListReset = (function(){
 	}
 })();
 
+var ifaRegisterHideField = (function(){
+
+	return {
+		init: function(){
+
+			var selectedValues = '';
+			$('#lead_assign').on('change',function(){
+				selectedValues = $.trim($("#lead_assign").find(":selected").val());
+
+				if(selectedValues == 'assign_sales_agent'){
+					$('.ifa_hide_field').removeClass('hidden');
+				}else{
+					$('.ifa_hide_field').addClass('hidden');
+				}
+			});
+			var aaa = $('#lead_assign').val();
+			// console.log(aaa);
+			removeHiddenClass(aaa);
+			
+			var itemoptions = {
+
+		    url: function(phrase) {
+		      return "/get/ifaRegistervalue";
+		    },
+
+		    getValue: function(element) {
+		      return element.name;
+		    },
+
+		    list: {
+		        match: {
+		            enabled: true
+		        },
+		    },
+		    // template: {
+	    	// 	type: "description",
+	    	// 	fields: {
+	    	// 		description: "type"
+	    	// 	}
+	    	// },
+		    ajaxSettings: {
+		      dataType: "json",
+		      method: "GET",
+		      data: {
+		        dataType: "json"
+		      }
+		    },
+
+		    requestDelay: 400
+		  };
+		  $("body #assign_ifa_register_name").easyAutocomplete(itemoptions);
+		  $(".add_input .easy-autocomplete").css("width","100%");
+		}};
+})();
+
+function removeHiddenClass($value){
+	if($value == 'assign_sales_agent'){
+		$('.ifa_hide_field').removeClass('hidden');
+	}
+}
+
 $(document).ready(function(){
 	leadCreateListFilterSearch.init();
 	leadCreateListReset.init();
+	ifaRegisterHideField.init();
 });

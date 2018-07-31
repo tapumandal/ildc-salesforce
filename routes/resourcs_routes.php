@@ -167,6 +167,7 @@ Route::group(['middleware' => 'auth'], function () {
 			]);
 		Route::get('/lead/list/Filter/Value','Lead\LeadSearchController@getLeadSearchValue');
 		Route::get('/lead/list/all/value','Lead\LeadSearchController@getLeadAllValue');
+		Route::get('/get/ifaRegistervalue','Lead\LeadSearchController@getIfaValue');
 	});
 });
 

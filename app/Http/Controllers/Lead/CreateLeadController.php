@@ -51,6 +51,7 @@ class CreateLeadController extends Controller
             'area.required' => 'Contact no field is required.',
             'investment_date.required' => 'Date field is required.',
             'investment_action.required' => 'Action field is required.',
+            'lead_assign.required' => 'Lead Assign field is required.',
             ];
         $validator = Validator::make($datas, 
             [
@@ -59,6 +60,7 @@ class CreateLeadController extends Controller
                 'area' => 'required',
                 'investment_date' => 'required',
                 'investment_action' => 'required',
+                'lead_assign' => 'required',
             ],
             $validMessages
         );
@@ -73,6 +75,8 @@ class CreateLeadController extends Controller
         $storeleads->lead_number = $this->leadUniqueNumber();
         $storeleads->reference_number = $this->referenceNumber();
         $storeleads->lead_type = $request->lead_type;
+        $storeleads->lead_assign = $request->lead_assign;
+        $storeleads->assign_ifa_register_name = $request->assign_ifa_register_name;
         $storeleads->personal_name = $request->personal_name;
         $storeleads->contact_no = $request->contact_no;
         $storeleads->email = $request->email;
@@ -101,6 +105,7 @@ class CreateLeadController extends Controller
             'area.required' => 'Contact no field is required.',
             'investment_date.required' => 'Date field is required.',
             'investment_action.required' => 'Action field is required.',
+            'lead_assign.required' => 'Lead Assign field is required.',
             ];
         $validator = Validator::make($datas, 
             [
@@ -109,6 +114,7 @@ class CreateLeadController extends Controller
                 'area' => 'required',
                 'investment_date' => 'required',
                 'investment_action' => 'required',
+                'lead_assign' => 'required',
             ],
             $validMessages
         );
@@ -123,6 +129,8 @@ class CreateLeadController extends Controller
         $updateleads->lead_number = $this->leadUniqueNumber();
         $updateleads->reference_number = $this->referenceNumber();
         $updateleads->lead_type = $request->lead_type;
+        $updateleads->lead_assign = $request->lead_assign;
+        $updateleads->assign_ifa_register_name = $request->assign_ifa_register_name;
         $updateleads->personal_name = $request->personal_name;
         $updateleads->contact_no = $request->contact_no;
         $updateleads->email = $request->email;

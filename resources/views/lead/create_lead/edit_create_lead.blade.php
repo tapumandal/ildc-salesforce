@@ -228,6 +228,47 @@
 									</div>
 								</div>
 
+								<div class="col-sm-4">
+									<div class="form-group add_input{{ $errors->has('lead_assign') ? '  has-error' : ''}}">
+										<label class="col-sm-8 control-label ">
+											<span class="pull-left ">Lead Assigned Status <span style="color: red;">*</span></span>
+										</label>
+										<div class="col-sm-12">
+											<select class="form-control" name="lead_assign" id="lead_assign">
+												<option value=""> Choose a option</option>
+												<option <?php echo $object->valueCheck($valueslead->lead_assign,'disable_for_sales_agent')?> value="disable_for_sales_agent">Disable for sales Agent</option>
+
+												<option <?php echo $object->valueCheck($valueslead->lead_assign,'open_for_all')?> value="open_for_all">Open for All</option>
+												<option <?php echo $object->valueCheck($valueslead->lead_assign,'assign_sales_agent')?> value="assign_sales_agent">Assign a sales Agent</option>
+											</select>
+
+											@if($errors->has('lead_assign'))
+												<span class="help-block">
+													{{ $errors->first('lead_assign')}}
+												</span>
+											@endif
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-4 ifa_hide_field hidden">
+									<div class="form-group add_input{{ $errors->has('lead_assign') ? '  has-error' : ''}}">
+										<label class="col-sm-8 control-label ">
+											<span class="pull-left ">IFA Register Member<span style="color: red;">*</span></span>
+										</label>
+										<div class="col-sm-12">
+											<input type="text" name="assign_ifa_register_name" 
+											id="assign_ifa_register_name" placeholder="Type Application no" class="form-control" value="{{$valueslead->assign_ifa_register_name}}">
+
+											@if($errors->has('lead_assign'))
+												<span class="help-block">
+													{{ $errors->first('lead_assign')}}
+												</span>
+											@endif
+										</div>
+									</div>
+								</div>								
+
 								<div class="col-sm-12">
 									<div class="form-group">
 										<label class="col-sm-4 control-label"> Remarks / Comments</label>
