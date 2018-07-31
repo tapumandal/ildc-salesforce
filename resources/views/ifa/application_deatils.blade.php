@@ -58,7 +58,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="mother_name">Mother's Name</label>
-                                        <input readonly type="text" class="form-control" id="mother_name" name="mother_name" placeholder="Mother's Name" value="{{ !isset($application_details->mother_name) ? '' : $application_details->mother_name  }}">
+                                        <input readonly type="text" class="form-control"    value="{{ !isset($application_details->mother_name) ? '' : $application_details->mother_name  }}">
                                     </div>
                                 </div>
                             </div>
@@ -68,18 +68,9 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="nationality">Nationality</label>
-                                        <select readonly class="form-control" id="nationality" name="nationality">
-                                            <option value="0">Select any</option>
-                                            <?php
-                                            if (isset($nationalities)) {
-                                            foreach ($nationalities as $nt) {
-                                            ?>
-                                            <option value="{{ $nt->id_nationality }}" {{ $application_details->nationality == $nt->id_nationality ? 'selected="selected"' : '' }}>{{ $nt->nationality }}</option>
-                                            <?php
-                                            }
-                                            }
-                                            ?>
-                                            <option value="-1" {{ $application_details->nationality == -1 ? 'selected="selected"' : '' }}>Others</option>
+                                            @if (isset($application_details->nationality))
+                                                <input readonly type="text" class="form-control"    value="{{ $application_details->nationality_info->nationality}}">
+                                            @endif
                                         </select>
                                     </div>
                                     <div class="form-group others_nationality_flag_yes" style="display: none;">
@@ -93,35 +84,20 @@
                                         <input readonly type="text" class="form-control" id="date_of_birth" name="date_of_birth" placeholder="Date of Birth" data-provide="datepicker" value="{{ !isset($application_details->date_of_birth) ?: $application_details->date_of_birth  }}">
                                     </div>
                                 </div>
+
+
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label for="national_id_card_no">National ID Card No.  </label>
-                                        <input readonly type="text" class="form-control" id="national_id_card_no" name="national_id_card_no" placeholder="National ID Card No." value="{{ !isset($application_details->national_id_card_no) ?: $application_details->national_id_card_no  }}">
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="form-group">
                                         <label for="user_type">User Type</label>
-                                        <select readonly class="form-control" id="user_type" name="user_type">
-                                            <option value="">Select any</option>
-                                            <?php
-                                            if (isset($user_types)) {
-                                            foreach ($user_types as $nt) {
-                                            ?>
-                                            <option value="{{ $nt->id_user_type }}" {{ $application_details->user_type_id == $nt->id_user_type ? 'selected="selected"' : '' }}>{{ $nt->user_type }}</option>
-                                            <?php
-                                            }
-                                            }
-                                            ?>
-                                            <option value="-1"  {{ $application_details->user_type_id == -1 ? 'selected="selected"' : '' }}>Others</option>
-                                        </select>
+                                        @if (isset($application_details->user_type))
+                                            <input readonly type="text" class="form-control"    value="{{ $application_details->user_type->user_type}}">
+                                        @else
+                                            <input readonly type="text" class="form-control"    value="">
+                                            @endif
+                                            </select>
                                     </div>
                                 </div>
+
                                 <div class="col-sm-3">
                                     <div class="form-group others_user_type_flag_yes" style="display: none;">
                                         <label for="others_user_type">Others User Type</label>
@@ -129,8 +105,32 @@
                                     </div>
                                 </div>
 
+                            </div>
+
+
+
+                            <div class="row">
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="national_id_card_no">National ID Card No.  </label>
+                                        <input style="width: 80% !important; float: left;" readonly type="text" class="form-control" id="national_id_card_no" name="national_id_card_no" placeholder="National ID Card No." value="{{ !isset($application_details->national_id_card_no) ?: $application_details->national_id_card_no  }}">
+                                        @if($application_details->nid_validation_status == 'Valid')
+                                            <span style="padding-left: 10px; float:left; color: #5cb85c; font-size: 30px;" class="glyphicon glyphicon-ok-circle"></span>
+                                        @elseif($application_details->nid_validation_status == 'InValid')
+                                            <span style="padding-left: 10px; float:left; color: red; font-size: 30px;" class="glyphicon glyphicon-remove-circle"></span>
+                                        @else
+                                        @endif
+                                    </div>
+                                    <div class="form-group" style="width: 100%; float: left;">
+                                        <a href="{{ route('applicant_nid_validate_action', [$application_details->application_no, 'Valid'] ) }}" style="float: left; width: 37.5%;" class="btn btn-success">Valid</a>
+                                        <a href="{{ route('applicant_nid_validate_action', [$application_details->application_no, 'InValid'] ) }}" style="float: left; width: 37.5%; margin-left: 5%;" class="btn btn-danger">InValid</a>
+                                    </div>
+                                </div>
+
+
                                 <div class="col-sm-3 uploaded_picture_preview_div">
-                                    <img id="uploaded_picture_preview" src="{{ asset('idlc_aml_images/ifa_registrations/' . $application_details->application_no . $application_details->image_ext) }}" alt="Uploaded Picture Preview" width="100" />
+                                    <img id="uploaded_picture_preview" src="{{ asset('idlc_aml_images/ifa_registrations/' . $application_details->application_no . $application_details->image_ext) }}" alt="Uploaded Picture Preview" width="185" />
                                 </div>
                             </div>
 
@@ -155,43 +155,31 @@
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <label for="present_address_premise_ownership">Premise Ownership</label>
-                                                        <select readonly class="form-control" id="present_address_premise_ownership" name="present_address_premise_ownership">
-                                                            <option value="0">Select any</option>
-                                                            <?php
-                                                            if (isset($premise_ownerships)) {
-                                                            foreach ($premise_ownerships as $po) {
-                                                            ?>
-                                                            <option value="{{ $po->id_premise_ownership }}" {{ $application_details->pre_addr_premise_ownership == $po->id_premise_ownership ? 'selected="selected"' : '' }}>{{ $po->premise_ownership }}</option>
-                                                            <?php
-                                                            }
-                                                            }
-                                                            ?>
-                                                        </select>
+                                                        @if (isset($application_details->premise_ownership))
+                                                            <input readonly type="text" class="form-control"    value="{{ $application_details->premise_ownership->premise_ownership}}">
+                                                        @else
+                                                            <input readonly type="text" class="form-control"    value="">
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <label for="present_address_division">Division</label>
-                                                        <select readonly class="form-control division_id" id="present_address_division" name="present_address_division">
-                                                            <option value="0">Select any</option>
-                                                            <?php
-                                                            if (isset($divisions)) {
-                                                            foreach ($divisions as $divs) {
-                                                            ?>
-                                                            <option value="{{ $divs->division_id }}">{{ $divs->division_name }}</option>
-                                                            <?php
-                                                            }
-                                                            }
-                                                            ?>
-                                                        </select>
+                                                        @if (isset($application_details->pre_division))
+                                                            <input readonly type="text" class="form-control"    value="{{ $application_details->pre_division->division_name}}">
+                                                        @else
+                                                            <input readonly type="text" class="form-control"    value="">
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <label for="present_address_district">District</label>
-                                                        <select readonly class="form-control district_id" id="present_address_district" name="present_address_district">
-                                                            <option value="0">Select any</option>
-                                                        </select>
+                                                        @if (isset($application_details->pre_district))
+                                                            <input readonly type="text" class="form-control"    value="{{ $application_details->pre_district->district_name}}">
+                                                        @else
+                                                            <input readonly type="text" class="form-control"    value="">
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
@@ -250,80 +238,71 @@
                                                 </label>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <div class="form-group is_same_as_present_address_flag_yes">
-                                                        <label for="permanent_address_premise_ownership">Premise Ownership</label>
-                                                        <select readonly class="form-control" id="permanent_address_premise_ownership" name="permanent_address_premise_ownership">
-                                                            <option value="0">Select any</option>
-                                                            <?php
-                                                            if (isset($premise_ownerships)) {
-                                                            foreach ($premise_ownerships as $po) {
-                                                            ?>
-                                                            <option value="{{ $po->id_premise_ownership }}" {{ $application_details->per_addr_premise_ownership == $po->id_premise_ownership ? 'selected="selected"' : '' }}>{{ $po->premise_ownership }}</option>
-                                                            <?php
-                                                            }
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="form-group is_same_as_present_address_flag_yes">
-                                                        <label for="permanent_address_division">Division</label>
-                                                        <select readonly class="form-control division_id" id="permanent_address_division" name="permanent_address_division">
-                                                            <option value="0">Select any</option>
-                                                            <?php
-                                                            if (isset($divisions)) {
-                                                            foreach ($divisions as $divs) {
-                                                            ?>
-                                                            <option value="{{ $divs->division_id }}">{{ $divs->division_name }}</option>
-                                                            <?php
-                                                            }
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="form-group is_same_as_present_address_flag_yes">
-                                                        <label for="permanent_address_district">District</label>
-                                                        <select readonly class="form-control district_id" id="permanent_address_district" name="permanent_address_district">
-                                                            <option value="0">Select any</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="form-group is_same_as_present_address_flag_yes">
-                                                        <label for="permanent_address_po">Thana</label>
-                                                        <input readonly type="text" class="form-control" id="permanent_address_po" name="permanent_address_po" value="{{ $application_details->per_addr_ps_id }}" placeholder="Thana">
-                                                        {{-- <select readonly" class="form-control thana_id" id="permanent_address_po" name="permanent_address_po">
-                                                            <option value="0">Select any</option>
-                                                        </select> --}}
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @if($application_details->is_same_as_present_address == 0)
 
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <div class="form-group is_same_as_present_address_flag_yes">
-                                                        <label for="permanent_address_road_no">Road No.</label>
-                                                        <input readonly type="text" class="form-control" id="permanent_address_road_no" name="permanent_address_road_no" placeholder="Road No." value="{{ !isset($application_details->per_addr_road_no) ? '' : $application_details->per_addr_road_no  }}">
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group is_same_as_present_address_flag_yes">
+                                                            <label for="permanent_address_premise_ownership">Permise Ownership</label>
+                                                            @if (isset($application_details->permise_ownership))
+                                                                <input readonly type="text" class="form-control"    value="{{ $application_details->permise_ownership->premise_ownership   }}">
+                                                            @else
+                                                                <input readonly type="text" class="form-control"    value="">
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group is_same_as_present_address_flag_yes">
+                                                            <label for="permanent_address_division">Division</label>
+                                                            @if (isset($application_details->per_division))
+                                                                <input readonly type="text" class="form-control"    value="{{ $application_details->per_division->division_name}}">
+                                                            @else
+                                                                <input readonly type="text" class="form-control"    value="">
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group is_same_as_present_address_flag_yes">
+                                                            <label for="permanent_address_district">District</label>
+                                                            @if (isset($application_details->per_district))
+                                                                <input readonly type="text" class="form-control"  value="{{ $application_details->per_district->district_name}}">
+                                                            @else
+                                                                <input readonly type="text" class="form-control" value="">
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group is_same_as_present_address_flag_yes">
+                                                            <label for="permanent_address_po">Thana</label>
+                                                            <input readonly type="text" class="form-control" id="permanent_address_po" name="permanent_address_po" value="{{ $application_details->per_addr_ps_id }}" placeholder="Thana">
+                                                            {{-- <select readonly" class="form-control thana_id" id="permanent_address_po" name="permanent_address_po">
+                                                                <option value="0">Select any</option>
+                                                            </select> --}}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group is_same_as_present_address_flag_yes">
-                                                        <label for="permanent_address_house_no">House No.</label>
-                                                        <input readonly type="text" class="form-control" id="permanent_address_house_no" name="permanent_address_house_no" placeholder="House No." value="{{ !isset($application_details->per_addr_house_no) ? '' : $application_details->per_addr_house_no  }}">
+
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group is_same_as_present_address_flag_yes">
+                                                            <label for="permanent_address_road_no">Road No.</label>
+                                                            <input readonly type="text" class="form-control" id="permanent_address_road_no" name="permanent_address_road_no" placeholder="Road No." value="{{ !isset($application_details->per_addr_road_no) ? '' : $application_details->per_addr_road_no  }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group is_same_as_present_address_flag_yes">
+                                                            <label for="permanent_address_house_no">House No.</label>
+                                                            <input readonly type="text" class="form-control" id="permanent_address_house_no" name="permanent_address_house_no" placeholder="House No." value="{{ !isset($application_details->per_addr_house_no) ? '' : $application_details->per_addr_house_no  }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group is_same_as_present_address_flag_yes">
+                                                            <label for="permanent_address_flat_no">Flat No.</label>
+                                                            <input readonly type="text" class="form-control" id="permanent_address_flat_no" name="permanent_address_flat_no" placeholder="Flat No." value="{{ !isset($application_details->per_addr_flat_no) ? '' : $application_details->per_addr_flat_no  }}">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <div class="form-group is_same_as_present_address_flag_yes">
-                                                        <label for="permanent_address_flat_no">Flat No.</label>
-                                                        <input readonly type="text" class="form-control" id="permanent_address_flat_no" name="permanent_address_flat_no" placeholder="Flat No." value="{{ !isset($application_details->per_addr_flat_no) ? '' : $application_details->per_addr_flat_no  }}">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endif
 
                                         </div>
                                     </div>
@@ -336,7 +315,7 @@
     </div>
      <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Paymement</h3>
+            <h3 class="panel-title">Educational/Professional Information</h3>
         </div>
         <div class="panel-body">
             <div id="educational_professional_information">
@@ -371,24 +350,25 @@
                                     <input readonly type="radio" id="job_holder_no" name="job_holder" value="no"  {{ $application_details->is_job_holder == 0 ? 'checked="checked"' : '' }}> No
                                 </label>
                             </div>
+                            @if($application_details->is_job_holder == 1)
+                                <div class="form-group " >
+                                    <label for="organization_name">Organization Name</label>
+                                    <input readonly type="text" class="form-control" id="organization_name" name="organization_name" placeholder="Organization Name" value="{{ !isset($application_details->organization_name) ? '' : $application_details->organization_name  }}">
+                                </div>
 
-                            <div class="form-group job_holder_flag_yes" style="display: none">
-                                <label for="organization_name">Organization Name</label>
-                                <input readonly type="text" class="form-control" id="organization_name" name="organization_name" placeholder="Organization Name" value="{{ !isset($application_details->organization_name) ? '' : $application_details->organization_name  }}">
-                            </div>
-
-                            <div class="form-group job_holder_flag_yes" style="display: none">
-                                <label for="job_holder_department">Department</label>
-                                <input readonly type="text" class="form-control" id="job_holder_department" name="job_holder_department" placeholder="Job Holder Department" value="{{ !isset($application_details->job_holder_department) ? '' : $application_details->job_holder_department  }}">
-                            </div>
-                            <div class="form-group job_holder_flag_yes" style="display: none">
-                                <label for="designation">Designation</label>
-                                <input readonly type="text" class="form-control" id="designation" name="designation" placeholder="Designation"  value="{{ !isset($application_details->designation) ? '' : $application_details->designation  }}">
-                            </div>
-                            <div class="form-group job_holder_flag_yes" style="display: none">
-                                <label for="employee_id_no">Employee ID No.</label>
-                                <input readonly type="text" class="form-control" id="employee_id_no" name="employee_id_no" placeholder="Employee ID No." value="{{ !isset($application_details->employee_id_no) ? '' : $application_details->employee_id_no  }}">
-                            </div>
+                                <div class="form-group " >
+                                    <label for="job_holder_department">Department</label>
+                                    <input readonly type="text" class="form-control" id="job_holder_department" name="job_holder_department" placeholder="Job Holder Department" value="{{ !isset($application_details->job_holder_department) ? '' : $application_details->job_holder_department  }}">
+                                </div>
+                                <div class="form-group " >
+                                    <label for="designation">Designation</label>
+                                    <input readonly type="text" class="form-control" id="designation" name="designation" placeholder="Designation"  value="{{ !isset($application_details->designation) ? '' : $application_details->designation  }}">
+                                </div>
+                                <div class="form-group " >
+                                    <label for="employee_id_no">Employee ID No.</label>
+                                    <input readonly type="text" class="form-control" id="employee_id_no" name="employee_id_no" placeholder="Employee ID No." value="{{ !isset($application_details->employee_id_no) ? '' : $application_details->employee_id_no  }}">
+                                </div>
+                            @endif
 
                         </div>
                         <div class="col-sm-6">
@@ -401,23 +381,32 @@
                                     <input readonly type="radio" id="student_no" name="student" value="no"  {{ $application_details->is_student == 0 ? 'checked="checked"' : '' }}> No
                                 </label>
                             </div>
-
-                            <div class="form-group student_flag_yes" style="display: none">
-                                <label for="institution_name">Institution Name</label>
-                                <input readonly type="text" class="form-control" id="institution_name" name="institution_name" placeholder="Institution Name" value="{{ !isset($application_details->institution_name) ? '' : $application_details->institution_name  }}">
-                            </div>
-                            <div class="form-group student_flag_yes" style="display: none">
-                                <label for="student_department">Department</label>
-                                <input readonly type="text" class="form-control" id="student_department" name="student_department" placeholder="Student's Department" value="{{ !isset($application_details->student_department) ? '' : $application_details->student_department  }}">
-                            </div>
-                            <div class="form-group student_flag_yes" style="display: none">
-                                <label for="student_id_card_no">Student ID Card No.</label>
-                                <input readonly type="text" class="form-control" id="student_id_card_no" name="student_id_card_no" placeholder="Student ID Card No." value="{{ !isset($application_details->student_id_card_no) ? '' : $application_details->student_id_card_no  }}">
-                            </div>
+                            @if($application_details->is_student== 1)
+                                <div class="form-group " >
+                                    <label for="institution_name">Institution Name</label>
+                                    <input readonly type="text" class="form-control" id="institution_name" name="institution_name" placeholder="Institution Name" value="{{ !isset($application_details->institution_name) ? '' : $application_details->institution_name  }}">
+                                </div>
+                                <div class="form-group " >
+                                    <label for="student_department">Department</label>
+                                    <input readonly type="text" class="form-control" id="student_department" name="student_department" placeholder="Student's Department" value="{{ !isset($application_details->student_department) ? '' : $application_details->student_department  }}">
+                                </div>
+                                <div class="form-group " >
+                                    <label for="student_id_card_no">Student ID Card No.</label>
+                                    <input readonly type="text" class="form-control" id="student_id_card_no" name="student_id_card_no" placeholder="Student ID Card No." value="{{ !isset($application_details->student_id_card_no) ? '' : $application_details->student_id_card_no  }}">
+                                </div>
+                            @endif
                         </div>
                     </div>
 
             </div>
+            </div>
+            </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Paymement</h3>
+        </div>
+        <div class="panel-body">
             <div id="bank_alternate_channel_information">
 
                     <div class="row">
@@ -433,63 +422,62 @@
                             </div>
                         </div>
                     </div>
+                    @if($application_details->receive_sales_commission_by == 'Bank')
+                        <div class="row receive_sales_commission_by_flag_Bank">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="bank">Bank</label>
 
-                    <div class="row receive_sales_commission_by_flag_Bank">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="bank">Bank</label>
-                                <select readonly class="form-control" id="bank" name="bank">
-                                    <option value="">Select any</option>
-                                    <?php
-                                    if (isset($banks)) {
-                                    foreach ($banks as $bnks) {
-                                    ?>
-                                    <option value="{{ $bnks->bank_id }}" {{ $bnks->bank_id == $application_details->bank_id ? 'selected="selected"' : ''}}>{{ $bnks->bank_name }}</option>
-                                    <?php
-                                    }
-                                    }
-                                    ?>
-                                </select>
+                                    @if (isset($application_details->bank))
+                                        <input readonly type="text" class="form-control"    value="{{ $application_details->bank->bank_name}}">
+                                    @else
+                                        <input readonly type="text" class="form-control"    value="">
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="branch">Branch</label>
-                                <select readonly class="form-control" id="branch" name="branch">
-                                    <option value="">Select any</option>
-                                </select>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="branch">Branch</label>
+                                    @if (isset($application_details->branch))
+                                        <input readonly type="text" class="form-control"    value="{{ $application_details->branch->branch_name}}">
+                                    @else
+                                        <input readonly type="text" class="form-control"    value="">
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="account_no">A/C No.</label>
-                                <input readonly type="text" class="form-control" id="account_no" name="account_no" placeholder="A/C No." value="{{ !isset($application_details->bank_account_no) ? '' : $application_details->bank_account_no  }}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row receive_sales_commission_by_flag_bKash" style="display: none">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="bKash_account_type">bKash A/C Type</label><br/>
-                                <label class="radio-inline">
-                                    <input readonly type="radio" id="bKash_account_type_Agent" name="bKash_account_type" value="Agent" {{$application_details->bKash_acc_type == 'Agent' ? 'checked="checked"' : '' }}> Agent
-                                </label>
-                                <label class="radio-inline">
-                                    <input readonly type="radio" id="bKash_account_type_Personal" name="bKash_account_type" value="Personal" {{ $application_details->bKash_acc_type == 'Personal' ? 'checked="checked"' : '' }}> Personal
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="bKash_mobile_no">bKash Mobile No.</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon" id="basic-addon2">+88 01</span>
-                                    <input readonly type="number" class="form-control" id="bKash_mobile_no" name="bKash_mobile_no" placeholder="bKash Mobile No." aria-describedby="basic-addon2" value="{{ !isset($application_details->bKash_mobile_no) ? '' : $application_details->bKash_mobile_no  }}">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="account_no">A/C No.</label>
+                                    <input readonly type="text" class="form-control" id="account_no" name="account_no" placeholder="A/C No." value="{{ !isset($application_details->bank_account_no) ? '' : $application_details->bank_account_no  }}">
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
+
+                    @if($application_details->receive_sales_commission_by == 'bKash')
+                        <div class="row receive_sales_commission_by_flag_bKash" style="">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="bKash_account_type">bKash A/C Type</label><br/>
+                                    <label class="radio-inline">
+                                        <input readonly type="radio" id="bKash_account_type_Agent" name="bKash_account_type" value="Agent" {{$application_details->bKash_acc_type == 'Agent' ? 'checked="checked"' : '' }}> Agent
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input readonly type="radio" id="bKash_account_type_Personal" name="bKash_account_type" value="Personal" {{ $application_details->bKash_acc_type == 'Personal' ? 'checked="checked"' : '' }}> Personal
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="bKash_mobile_no">bKash Mobile No.</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon2">+88 01</span>
+                                        <input readonly type="number" class="form-control" id="bKash_mobile_no" name="bKash_mobile_no" placeholder="bKash Mobile No." aria-describedby="basic-addon2" value="{{ !isset($application_details->bKash_mobile_no) ? '' : $application_details->bKash_mobile_no  }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
 
 
 

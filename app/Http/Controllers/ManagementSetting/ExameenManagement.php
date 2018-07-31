@@ -38,7 +38,7 @@ class ExameenManagement extends Controller
     public function scheduleExameenView(Request $req){
         $exameen = ApprovedExameen::with('exameen')->where('exam_schedule_id', $req->exam_schedule_id)->get();
         $schedule = ExamSchedule::where('id', $req->exam_schedule_id)->first();
-
+//        return $exameen;
         return view('management_setting.exam_schedule.exameen_list', compact('exameen', 'schedule'));
     }
 
