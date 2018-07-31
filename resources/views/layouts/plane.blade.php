@@ -19,6 +19,9 @@
 	<link href="{{ asset('assets/customByMxp/css/select2.min.css') }}" rel="stylesheet" />
 	<script src="{{ asset('assets/customByMxp/js/select2.min.js') }}"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="{{ asset('assets/scripts/easy-autocomplete.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('assets/scripts/easy-autocomplete.themes.min.css') }}" />
 </head>
 <body>
 	<?php $languages = App\Http\Controllers\Trans\TranslationController::getLanguageList();?>
@@ -40,6 +43,7 @@
 
 
 	<script src="{{ asset('assets/scripts/frontend.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('assets/scripts/jquery.easy-autocomplete.min.js') }}"></script>
 	<script src="{{ asset('assets/scripts/ifa_filter.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('assets/scripts/lead_filter.js') }}" type="text/javascript"></script>
 	<script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>

@@ -8,8 +8,11 @@
                 <select class="form-control" id="selectMenuOption">
                     <option value=""> Choose a option</option>
                     <option value="highly_interested"> Highly Interested</option>
-                    <option value="might_inves"> Might Inves</option>
+                    <option value="might_inves"> Might Invest</option>
                     <option value="not_interested"> Not Interested</option>
+                    <option value="unassigned"> Unassigned</option>
+                    <option value="converted"> Converted</option>
+                    <option value="pitched"> Pitched</option>
 
                 </select>
         </div>
@@ -49,7 +52,7 @@
 <div class="col-sm-2">
     <div class="pull-left">
         <a href="{{ route('add_lead_view')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Lead </a>
-    </div>      
+    </div>
 </div>
 <div class="col-sm-10">
     <div class="input-group add-on" style="width:100%;">

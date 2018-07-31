@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('page_heading','Dashboard')
 @section('section')
-           
+
     <!-- /.row -->
     <div class="col-sm-12">
         <!-- Info boxes -->
@@ -12,7 +12,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Unassigned</span>
-                <span class="info-box-number">90<small>%</small></span>
+                <span class="info-box-number">{{ $unassigned }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -25,7 +25,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Converted</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-number">{{ $converted }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -42,7 +42,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Highly Interested</span>
-                <span class="info-box-number">760</span>
+                <span class="info-box-number">{{ $highly_interested }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -55,7 +55,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Conversion Ratio</span>
-                <span class="info-box-number">70%</span>
+                <span class="info-box-number">{{ $conversion_ratio }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -64,6 +64,7 @@
           <!-- /.col -->
         </div>
         <!-- /.row -->
+
 
         <div class="row">
             <div class="col-md-12">
@@ -93,7 +94,7 @@
 
                               <div class="progress-group">
                                 <span class="progress-text">Interested</span>
-                                <span class="progress-number"><b>160</b>/200</span>
+                                <span class="progress-number"><b>{{ $interested }}</b>/{{ $totalLeadValue }}</span>
 
                                 <div class="progress sm">
                                   <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
@@ -102,7 +103,7 @@
                               <!-- /.progress-group -->
                               <div class="progress-group">
                                 <span class="progress-text">Highly Intrest</span>
-                                <span class="progress-number"><b>310</b>/400</span>
+                                <span class="progress-number"><b>{{ $highly_interested }}</b>/{{ $totalLeadValue }}</span>
 
                                 <div class="progress sm">
                                   <div class="progress-bar progress-bar-red" style="width: 80%"></div>
@@ -111,7 +112,7 @@
                               <!-- /.progress-group -->
                               <div class="progress-group">
                                 <span class="progress-text">Converted</span>
-                                <span class="progress-number"><b>480</b>/800</span>
+                                <span class="progress-number"><b>{{ $converted }}</b>/{{ $totalLeadValue }}</span>
 
                                 <div class="progress sm">
                                   <div class="progress-bar progress-bar-green" style="width: 80%"></div>
@@ -120,7 +121,7 @@
                               <!-- /.progress-group -->
                               <div class="progress-group">
                                 <span class="progress-text">Might Invest</span>
-                                <span class="progress-number"><b>250</b>/500</span>
+                                <span class="progress-number"><b>{{ $might_invest }}</b>/{{ $totalLeadValue }}</span>
 
                                 <div class="progress sm">
                                   <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
@@ -137,5 +138,5 @@
                       <!-- /.box -->
                     </div>
         </div>
-            
+
 @stop
