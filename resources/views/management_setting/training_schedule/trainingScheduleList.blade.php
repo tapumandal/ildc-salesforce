@@ -2,6 +2,13 @@
 @section('page_heading','Training Schedule')
 @section('section')
 <div class="col-sm-12">
+
+    @if(Session::has('exam_status'))
+        <div style="width:100%; text-align: center;" class="alert {{ Session::get('alert-class') }}">
+            {{ Session::get('exam_status') }}
+        </div>
+    @endif
+
 	<div class="col-sm-12" style="padding: 0;">
 
         <div class="col-sm-3" style="padding: 0;">

@@ -45,7 +45,7 @@
                                     <td>{{ $applicant->email}}</td>
                                     <td>{{ $applicant->pre_addr_ps_id }}</td>
                                     <td>
-                                        <input type="checkbox" value="1" name="training_status[{{ $applicant->application_no }}]">
+                                        <input class="trainint_applicant_no" type="checkbox" value="1" name="training_status[{{ $applicant->application_no }}]">
                                     </td>
                                     {{--<td>--}}
                                         <input type="hidden" value="1" name="is_required[{{ $applicant->application_no }}]" checked>
@@ -56,6 +56,9 @@
                             </tbody>
                         </table>
                         <div class="form-group add_input">
+                            <div class="col-md-2 col-md-offset-10" style=" padding-bottom: 10px; padding-right: 0px; ">
+                                <a style="width: 100%;" id="select_all_trainee_applicant" href="javascript:void(0)" class="btn btn-primary">Select All</a>
+                            </div>
                             <div class="col-md-2 col-md-offset-10" style="padding-right: 0px;">
                                 <button type="submit" class="btn btn-primary" style="width:100%">Add
                                 </button>
