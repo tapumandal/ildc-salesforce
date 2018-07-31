@@ -38,4 +38,13 @@ class LeadDetailsView extends Controller
         }
         return $data; 
     }
+    public function valueCheckV($value,$check){
+
+        if(isset($value) && ($value == $check)){
+          $data = "selected";
+        }else{
+            $data = "class='hidden'";
+        }
+        return $data; 
+    }
 }
