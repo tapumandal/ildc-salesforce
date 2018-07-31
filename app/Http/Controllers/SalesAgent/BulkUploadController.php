@@ -467,12 +467,165 @@ class BulkUploadController extends Controller
 	            }
 	            return back();
 	        }else {
-	            Session::flash('bulkerror', 'File is a '.$extension.' file.!! Please upload a valid xls/csv file..!!');
+	            Session::flash('bulkerror', 'File is a '.$extension.' file.!! Please upload a valid xls file..!!');
 	            return back();
 	        }
 	    }
     }
+    public function leadBulkUploadAction(Request $request){
+        $this->validate($request, array(
+            'bulk'      => 'required'
+        ));
 
+        if($request->hasFile('bulk')){
+            $extension = File::extension($request->file('bulk')->getClientOriginalName());
+            if ($extension == "xlsx" || $extension == "xls") {
+            	$getOcupations = $this->getOcupations();
+                $path = $request->file('bulk')->getRealPath();
+                $data = Excel::load($path, function($reader) {
+                })->get();
+                $insert = [];
+                $err_insert = [];
+                if(!empty($data) && $data->count()){
+                    	$i = 0;
+                    foreach ($data as $ykey => $yvalue) {
+                    	$temp_insert[] = self::generateArray($yvalue);
+                    }
+                }
+                $filters_array = self::unique_multidim_array($temp_insert,'contact_no');
+                $filters_array = self::unique_multidim_array($filters_array,'email');
+                if(count($filters_array) == count($temp_insert)){
+    	            if(!empty($data) && $data->count()){
+    	                	$i = 0;
+    	                foreach ($data as $xkey => $xvalue) {
+
+    	                	if(isset($xvalue->personal_name)){
+    	                		$insert[$i]['personal_name'] = $xvalue->personal_name;
+    	                	}else{
+    	                		$insert[$i]['personal_name'] = '';
+    	                	}
+    	                	if(isset($xvalue->contact_no)){
+    	                		$insert[$i]['contact_no'] = $xvalue->contact_no;
+    	                	}else{
+    	                		$insert[$i]['contact_no'] = '';
+    	                	}
+    	                	if(isset($xvalue->email)){
+    	                		$insert[$i]['email'] = $xvalue->email;
+    	                	}else{
+    	                		$insert[$i]['email'] = '';
+    	                	}
+    	                	if(isset($xvalue->area)){
+    	                		$insert[$i]['area'] = $xvalue->area;
+    	                	}else{
+    	                		$insert[$i]['area'] = '';
+    	                	}	                	
+    	                	if(isset($xvalue->occupation_id)){
+    	                		if(isset($getOcupations[strtolower($xvalue->occupation_id)])){
+    	                			$insert[$i]['occupation_id'] = $getOcupations[strtolower($xvalue->occupation_id)];
+    	                		}else{
+    	                			$insert[$i]['occupation_id'] = '';
+    	                		}
+    	                	}else{
+    	                		$insert[$i]['occupation_id'] = '';
+    	                	}
+    	                	if(isset($xvalue->user_id)){
+    	                		$insert[$i]['user_id'] = $xvalue->user_id;
+    	                	}else{
+    	                		$insert[$i]['user_id'] = 0;
+    	                	}
+    	                	if(isset($xvalue->lead_number)){
+    	                		$insert[$i]['lead_number'] = $xvalue->lead_number;
+    	                	}else{
+    	                		$insert[$i]['lead_number'] = '';
+    	                	}
+    	                	if(isset($xvalue->lead_type)){
+    	                		$insert[$i]['lead_type'] = $xvalue->lead_type;
+    	                	}else{
+    	                		$insert[$i]['lead_type'] = 'new';
+    	                	}
+    	                	if(isset($xvalue->reference_number)){
+    	                		$insert[$i]['reference_number'] = $xvalue->reference_number;
+    	                	}else{
+    	                		$insert[$i]['reference_number'] = '';
+    	                	}
+    	                	if(isset($xvalue->investment_name)){
+    	                		$insert[$i]['investment_name'] = $xvalue->investment_name;
+    	                	}else{
+    	                		$insert[$i]['investment_name'] = '';
+    	                	}
+    	                	if(isset($xvalue->investment_type)){
+    	                		$insert[$i]['investment_type'] = $xvalue->investment_type;
+    	                	}else{
+    	                		$insert[$i]['investment_type'] = '';
+    	                	}
+    	                	if(isset($xvalue->follow_up_date)){
+    	                		$insert[$i]['follow_up_date'] = $xvalue->follow_up_date;
+    	                	}else{
+    	                		$insert[$i]['follow_up_date'] = '';
+    	                	}
+    	                	if(isset($xvalue->contact_status)){
+    	                		$insert[$i]['contact_status'] = $xvalue->contact_status;
+    	                	}else{
+    	                		$insert[$i]['contact_status'] = '';
+    	                	}
+    	                	if(isset($xvalue->interest_label)){
+    	                		$insert[$i]['interest_label'] = $xvalue->interest_label;
+    	                	}else{
+    	                		$insert[$i]['interest_label'] = '';
+    	                	}
+    	                	if(isset($xvalue->investment_action_id)){
+    	                		$insert[$i]['investment_action_id'] = $xvalue->investment_action_id;
+    	                	}else{
+    	                		$insert[$i]['investment_action_id'] = '';
+    	                	}
+    	                	if(isset($xvalue->remark_or_comment)){
+    	                		$insert[$i]['remark_or_comment'] = $xvalue->remark_or_comment;
+    	                	}else{
+    	                		$insert[$i]['remark_or_comment'] = '';
+    	                	}
+    	                	if(isset($xvalue->last_action)){
+    	                		$insert[$i]['last_action'] = $xvalue->last_action;
+    	                	}else{
+    	                		$insert[$i]['last_action'] = '';
+    	                	}
+                    	    $i = $i+1;
+    	                }
+    	                if(isset($insert) && !empty($insert)){
+    	                	if(DB::table('tbl_create_lead')->insert($insert)){
+    	                		if(isset($err_insert) && !empty($err_insert)){
+    	                			Session::flash('bulkerror', 'Successfully Inserted Partial data');
+    	                			Session::flash('err_ifa_list', $err_insert);
+    	                			return Redirect::back()->with(['err_ifa_list', $err_insert]);
+    	                		}else{
+    	                			Session::flash('bulksuccess', 'Successfully Inserted All Data');
+    	                			return Redirect::back();
+    	                		}
+    	                	}else{
+    	                		Session::flash('bulkerror', 'Somethings Wrong !!');
+    	                		if(isset($err_insert) && !empty($err_insert)){
+    	                			Session::flash('err_ifa_list', $err_insert);
+    	                			return Redirect::back()->with(['err_ifa_list', $err_insert]);
+    	                		}else{
+    	                			return Redirect::back()->with(['bulkerror', "Something Wrong!!"]);
+    	                		}
+    	                	}
+    	                }elseif (isset($err_insert) && !empty($err_insert)) {
+    	                	Session::flash('bulkerror', 'Somethings Wrong !!');
+                			Session::flash('err_ifa_list', $err_insert);
+                			return Redirect::back()->with(['err_ifa_list', $err_insert]);
+    	                }
+    	            }
+                }else{
+                	Session::flash('bulkerror', 'There It Has Some Of Duplicate Contact Number or Email..!!');
+                	return back();
+                }
+                return back();
+            }else {
+                Session::flash('bulkerror', 'File is a '.$extension.' file.!! Please upload a valid xls file..!!');
+                return back();
+            }
+        }
+    }
     public function storeBulk(){
     	return view('sales_agent.bulk_upload.viewBulkUpload');
     }
@@ -703,4 +856,19 @@ class BulkUploadController extends Controller
         } 
         return $temp_array; 
     } 
+
+    public function getOcupations(){
+    	$ocupations_ = DB::table('tbl_new_occupation')->orderBy('id_occupation', 'DESC')->where('is_active', 1)->get();
+    	$ocupations = array();
+    	if(isset($ocupations_) && !empty($ocupations_)){
+    		foreach ($ocupations_ as $ocupation) {
+    			if(isset($ocupation->occupation) && !empty($ocupation->occupation) && isset($ocupation->id_occupation) && !empty($ocupation->id_occupation)){
+    				$ocupations[strtolower($ocupation->occupation)] = $ocupation->id_occupation;
+    			}
+    		}
+    	}
+    	return $ocupations;
+    }
+
+
 }
