@@ -17,7 +17,11 @@ class LeadSearchController extends Controller
 {
 
 	public function getLeadAllValue(Request $request){
-        return json_encode(CreateLead::get());
+
+        $object = new InvestmentActionCreateLead();
+        $data = $this->getALLValue($object);
+
+        return json_encode($data);
     }
 
     public function getLeadSearchValue(Request $request){
@@ -55,8 +59,16 @@ class LeadSearchController extends Controller
         return json_encode($data);
     }
 
+    private function getALLValue($object){
+        $data = $object->orderBy('tcl.id_create_lead','DESC')
+                    ->select('tcl.*','name')
+                    ->join('tbl_create_lead as tcl','tcl.investment_action_id','id_investment_action')                  
+                    ->get();
+        return $data;
+    }
+
     private function searchByAscDsc($value = [],$object){
-    	$data = $object->orderBy('id_create_lead',$value['sortbyValues'])
+    	$data = $object->orderBy('tcl.id_create_lead',$value['sortbyValues'])
             		->select('tcl.*','name')
                     ->join('tbl_create_lead as tcl','tcl.investment_action_id','id_investment_action')                  
                     ->get();
