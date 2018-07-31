@@ -68,7 +68,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="nationality">Nationality</label>
-                                            @if (isset($application_details->nationality))
+                                            @if (isset($application_details->nationality_info))
                                                 <input readonly type="text" class="form-control"    value="{{ $application_details->nationality_info->nationality}}">
                                             @endif
                                         </select>
