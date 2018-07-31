@@ -13,10 +13,12 @@
 	<meta content="" name="author"/>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
+	<link rel="stylesheet" href="{{ asset("css/admin.css") }}" />
 
 		<!-- for select2 -->
 	<link href="{{ asset('assets/customByMxp/css/select2.min.css') }}" rel="stylesheet" />
 	<script src="{{ asset('assets/customByMxp/js/select2.min.js') }}"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 <body>
 	<?php $languages = App\Http\Controllers\Trans\TranslationController::getLanguageList();?>
@@ -45,6 +47,7 @@
 	<script type="text/javascript" src="{{ asset('js/journal.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/new_saleforces.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/new_saleforces_extended.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/dashboard2.js') }}"></script>
 
 </body>
 </html>

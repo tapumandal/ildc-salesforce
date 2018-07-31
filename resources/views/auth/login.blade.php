@@ -1,12 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.login-layout')
 
 @section('content')
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">{{ trans('others.login_label') }}</div>
-				<div class="panel-body">
+			<div class="">
+				<div class="">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
 							<strong>{{ trans('others.validationerror_there_were_some_problems_with_your_input') }}<br><br>
@@ -46,16 +45,21 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="col-md-6 col-md-offset-4 text-center">
+			                <button type="submit" class="btn btn-danger btn-block btn-flat">{{ trans('others.login_label') }}
+			                </button>
+			            </div>
 						
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
+					{{-- 	<div class="form-group">
+							<div class="col-md-8 col-md-offset-4">
 								<button type="submit" class="btn btn-primary" style="margin-right: 15px;">
 									{{ trans('others.login_label') }}
 								</button>
 
 								<!-- <a href="/password/email">{{ trans('others.forgot_your_password') }}</a> -->
 							</div>
-						</div>
+						</div> --}}
 					</form>
 				</div>
 			</div>
