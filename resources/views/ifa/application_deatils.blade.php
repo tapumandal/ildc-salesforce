@@ -122,10 +122,12 @@
                                         @else
                                         @endif
                                     </div>
+                                    @if($application_details->nid_validation_status == 'Submitted')
                                     <div class="form-group" style="width: 100%; float: left;">
                                         <a href="{{ route('applicant_nid_validate_action', [$application_details->application_no, 'Valid'] ) }}" style="float: left; width: 37.5%;" class="btn btn-success">Valid</a>
                                         <a href="{{ route('applicant_nid_validate_action', [$application_details->application_no, 'InValid'] ) }}" style="float: left; width: 37.5%; margin-left: 5%;" class="btn btn-danger">InValid</a>
                                     </div>
+                                    @endif
                                 </div>
 
 

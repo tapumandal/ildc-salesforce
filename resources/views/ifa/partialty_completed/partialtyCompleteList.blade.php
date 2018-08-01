@@ -1,13 +1,13 @@
 @extends('layouts.dashboard')
-@section('page_heading','Applicant Report')
+@section('page_heading','Applicantion Report')
 @section('section')
 <style type="text/css"></style>
 <div class="row top-body">
     <!-- <div class="panel panel-default"> -->
         <!-- <div class="panel-body"> -->
             <div class="col-sm-10">
-                <div class="form-group col-sm-3" id="error_1">
-                    <label class="col-sm-4 control-label">Title</label>
+                <div class="form-group col-sm-4" id="error_1">
+                    <label class="col-sm-4 control-label">Application Status</label>
                         <select class="form-control" id="selectMenuOption">
                             <option value=""> Choose a Option</option>
                             @foreach($getFilterOptionValue as $OptionValues)
@@ -16,23 +16,23 @@
                         </select>
                 </div>
 
-                <div class="form-group col-sm-3 " id="error_2">
+                <!-- <div class="form-group col-sm-3 " id="error_2">
                     <label class="col-sm-4 control-label">Title </label>
                         <select class="form-control" id="selectSortbyValue">
                             <option value="">--Select--</option>
                             <option value="ASC">ASC</option>
                             <option value="DESC">DESC</option>
                         </select>
-                </div>
+                </div> -->
 
-                <div class="form-group col-sm-3" id="error_3">
+                <div class="form-group col-sm-4" id="error_3">
                     <label class="col-sm-4 control-label">
                         From
                     </label>
                         <input type="date" name="date[from]" class="form-control" id="formDate">
                 </div>
 
-                <div class="form-group col-sm-3" id="error_4">
+                <div class="form-group col-sm-4" id="error_4">
                     <label class="col-sm-4 control-label">To</label>
                         <input type="date" name="date[to]" class="form-control" id="toDate">
                 </div>
@@ -80,7 +80,7 @@
                     </tr>
                 </thead>
                 <tbody id="ifa_list_tbody">
-                    @php($i =1)
+                   <!--  @php($i =1)
                     @foreach($getListValue as $value)
                         <tr>
                             <td>{{$i++}}</td>
@@ -94,12 +94,12 @@
                                 <a href="{{ route('application_details_view', $value->application_no) }}">View</a>
                             </td>
                         </tr>
-                    @endforeach
+                    @endforeach -->
                 </tbody>
             </table>
-            <div class="pagination_body">
+            <!-- <div class="pagination_body">
                 {{$getListValue->links()}}
-            </div>
+            </div> -->
 
             <div class="pagination-container">
                 <nav>
