@@ -6,10 +6,10 @@ var ifaManagementFilterSearch = (function(){
 			var menuValue 	= '';
 			var sortbyValue = '';
 				
-			$('#selectSortbyValue').on('change',function(){
+			$('#selectSortbyValue').on('change',function(e){
 				sortbyValue = $.trim($("#selectSortbyValue").find(":selected").val());
 			});
-			$('#selectMenuOption').on('change',function(){
+			$('#selectMenuOption').on('change',function(e){
 				menuValue = $.trim($("#selectMenuOption").find(":selected").val());
 				e.preventDefault();
 				$('.pagination_body').addClass('hidden');
@@ -34,7 +34,6 @@ var ifaManagementFilterSearch = (function(){
 				if(inputValidates == false){
 					return false;
 				}
-
 				$.ajax({
 		          type: "GET",
 		          url: "/getMenuFilterValue",
@@ -79,8 +78,10 @@ function checkOneTrueValue(value = {},id = {}){
 	return boolen ;
 }
 
-function addRowIfaIfa(results, start)
+function addRowIfa(results, start)
 {	
+	var root_url = window.location.protocol + "//" + window.location.host + "/";
+
 	$('.pagination').empty();
     $('#ifa_list_tbody').empty();
     $("#booking_list_pagination").css('display','none');
@@ -114,6 +115,7 @@ function addRowIfaIfa(results, start)
 	            '</td><td>'+ emptyCheckss(rows[i].email) +
 	            '</td><td>'+ emptyCheckss(rows[i].created_at) +
 	            '</td><td>'+ emptyCheckss(rows[i].nationality) +
+	            '<td><a href="'+root_url+'applicant/'+rows[i].application_no+'/details">View</a></td>'+
 	            '</td></tr>');
 	        sl++;
 	    }
