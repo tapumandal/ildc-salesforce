@@ -29,10 +29,10 @@
         <tbody>
             @if(isset($schedule))
             <tr>
-                <td>{{ $schedule->exam_schedule_name }}</td>
+                <td>{{ $schedule->examName['name'] }}</td>
                 <td>{{ $schedule->date }}</td>
                 <td>{{ $schedule->start_time }} - {{ $schedule->end_time }}</td>
-                <td>{{ $schedule->description }}</td>
+                <td>{{ $schedule->examName['description'] }}</td>
             </tr>
             @endif
         </tbody>

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\ManagementSetting;
+namespace App\Model\ManagementSetting;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Model\ManagementSetting\ExamName;
 
-class ExamSchedule extends Model
+class ExamDetails extends Model
 {
 
     public function examName(){

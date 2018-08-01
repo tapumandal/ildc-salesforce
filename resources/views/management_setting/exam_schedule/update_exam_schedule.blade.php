@@ -7,7 +7,7 @@
         <div class="col-sm-12">
             <div class="col-sm-2">
                 <div class="form-group ">
-                    <a href="{{route('training_schedule_view')}}" class="btn btn-primary ">
+                    <a href="{{route('exam_schedule_view')}}" class="btn btn-primary ">
                         <i class="fa fa-arrow-left"></i> Back</a>
                 </div>
             </div>
@@ -25,18 +25,27 @@
                                 <span class="pull-right">Exam Name</span>
                             </label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="exam_schedule_name" value="{{ $examSchedule->exam_schedule_name  }}" placeholder="Name">
+                                <!-- <input type="text" class="form-control" name="exam_schedule_name" value="{{ $examSchedule->exam_schedule_name  }}" placeholder="Name"> -->
+
+                                <div class="select">
+                                    <select class="form-control" type="select" name="exam_name_id"  required>
+                                        <option value="">Select Exam Name</option>
+                                        @foreach($examNames as $examName)
+                                            <option value="{{ $examName->id_exam_name }}" {{($examName->id_exam_name==$examSchedule->exam_name_id)? "selected":"" }}>{{$examName->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group add_input{{ $errors->has('exam_schedule_name') ? ' has-error' : ''}}">
+                        <!-- <div class="form-group add_input{{ $errors->has('exam_schedule_name') ? ' has-error' : ''}}">
                             <label class="col-md-4 control-label">
                                 <span class="pull-right">Description</span>
                             </label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="description" value="{{ $examSchedule->description  }}" placeholder="Description">
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group add_input{{ $errors->has('date') ? ' has-error' : ''}}">
                             <label class="col-md-4 control-label">
@@ -65,6 +74,25 @@
                             </div>
                         </div>
 
+
+
+                        <div class="form-group add_input">
+                            <label class="col-md-4 control-label">
+                                <span class="pull-right">Training Schedule</span>
+                            </label>
+                            <div class="col-md-6">
+                                <div class="select">
+                                    <select class="form-control" type="select" name="training_name" >
+                                        <option value="">Select a Schedule</option>
+                                        @foreach($trainingList as $training)
+                                            @if(isset($training->trainingName))
+                                                <option value="{{ $training->id }}"  {{($training->id==$examSchedule->training_schedule_id)? "selected":"" }}>{{ $training->trainingName->name }} ({{ $training->start_date }} - {{ $training->end_date }}) </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
 
 

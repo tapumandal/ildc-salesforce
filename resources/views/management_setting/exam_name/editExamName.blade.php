@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('page_heading','Update Training Name')
+@section('page_heading','Update Examination Name')
 @section('section')
 <div class=" col-sm-12 col-sm-offset-0 main_body">
 
@@ -7,7 +7,7 @@
 		<div class="col-sm-12">
 			<div class="col-sm-2">
 				<div class="form-group ">
-					<a href="{{route('new_training_name_view')}}" class="btn btn-primary ">
+					<a href="{{route('exam_name_list')}}" class="btn btn-primary ">
 					<i class="fa fa-arrow-left"></i> Back</a>
 				</div>
 			</div>
@@ -16,7 +16,7 @@
 			<div class="panel panel-default add_body">
 				<div class="panel-body">
 					@foreach($editValue as $value)
-					<form action="{{route('update_training_name')}}/{{$value->id_training_name}}" method="POST">
+					<form action="{{route('exam_name_update_action')}}/{{$value->id_exam_name}}" method="POST">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 							<div class="form-group add_input{{ $errors->has('name') ? ' has-error' : ''}}">
@@ -52,8 +52,8 @@
 								<div class="col-md-3 col-md-offset-4">
 									<div class="select">
 										<select class="form-control" type="select" name="isActive" >
-											<option  value="1" name="isActive" {{($value->is_active == 1)? 'selected' : '' }}>Active</option>
-											<option value="0" name="isActive" {{($value->is_active == 0)? 'selected' : '' }}>Inactive</option>
+											<option  value="1" name="isActive"  {{($value->is_active == 1)? 'selected' : '' }}>Active</option>
+											<option value="0" name="isActive"  {{($value->is_active == 0)? 'selected' : '' }}>Inactive</option>
 									    </select>
 									</div>
 								</div>
