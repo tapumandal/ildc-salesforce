@@ -38,7 +38,7 @@
             <tr>
                 <th class="">Serial</th>
                 <th class="">Exam Name</th>
-                <th class="">Description</th>
+                <!-- <th class="">Description</th> -->
                 <th class="">Date</th>
                 <th class="">Start Time</th>
                 <th class="">End Time</th>
@@ -52,8 +52,8 @@
 
                 <tr>
                     <td>{{$i}}</td>
-                    <td>{{ $exam->exam_schedule_name  }}</td>
-                    <td>{{ $exam->description  }}</td>
+                    <td>{{ $exam->examName['name']  }}</td>
+                    <!-- <td>{{ $exam->description  }}</td> -->
                     <td>{{ $exam->date }}</td>
                     <td>{{ $exam->start_time }}</td>
                     <td>{{ $exam->end_time }}</td>
