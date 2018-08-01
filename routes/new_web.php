@@ -56,5 +56,41 @@ Route::group(['middleware' => 'auth'], function () {
             'as' => 'applicant_nid_validate_action',
             'uses' => 'ifa\PartiallyCompleted@nidVaidate'
         ]);
+
+
+        //Create Exam name
+
+        Route::get('exam/name/list',[
+            'as' => 'exam_name_list',
+            'uses' => 'ManagementSetting\ExamNameController@index'
+        ]);
+
+        Route::get('exam/name/create',[
+            'as' => 'exam_name_create',
+            'uses' => 'ManagementSetting\ExamNameController@addExamName'
+        ]);
+
+        Route::post('exam/name/create',[
+            'as' => 'exam_name_create_action',
+            'uses' => 'ManagementSetting\ExamNameController@storeExamName'
+        ]);
+
+        Route::get('exam/name/edit/{id?}',[
+            'as' => 'exam_name_edit_view',
+            'uses' => 'ManagementSetting\ExamNameController@editExamName'
+        ]);
+
+        Route::post('exam/name/update/{id?}',[
+            'as' => 'exam_name_update_action',
+            'uses' => 'ManagementSetting\ExamNameController@updateExamName'
+        ]);
     });
 });
+
+
+// INSERT INTO `mxp_menu` (`menu_id`, `name`, `route_name`, `description`, `parent_id`, `is_active`, `order_id`, `created_at`, `updated_at`) VALUES
+// (105, 'Exam name', 'exam_name_list', 'Exam name List', 96, 1, 4, NULL, NULL),
+// (106, 'Exam name Create View', 'exam_name_create', 'Exam name Create View', 0, 1, 0, NULL, NULL),
+// (107, 'EXAM NAME CREATE ACTION', 'exam_name_create_action', 'EXAM NAME CREATE ACTION', 0, 1, 0 , NULL, NULL),
+// (108, 'Exam name Edit View', 'exam_name_update', 'Exam name Edit View', 0, 1, 0, NULL, NULL),
+// (109, 'EXAM NAME EDIT ACTION', 'exam_name_update_action', 'EXAM NAME EDIT ACTION form', 0, 1, 0, NULL, NULL);
