@@ -105,12 +105,17 @@ INSERT INTO `mxp_menu` (`menu_id`, `name`, `route_name`, `description`, `parent_
 (96, 'Management Settings', '', 'Management Settings', 0, 1, 0, NULL, NULL),
 (97, 'New Organization ', 'organization_view', 'New Organization ', 96, 1, 1, NULL, NULL),
 (98, 'New Training name', 'new_training_name_view', 'New Training name', 96, 1, 2, NULL, NULL),
-(99, 'Training Schedule ', 'training_schedule_view', 'Training Schedule ', 96, 1, 3, NULL, NULL),
-(100, 'Exam Schedule', 'exam_schedule_view', 'Exam Schedule', 96, 1, 4, NULL, NULL),
+(99, 'Training Schedule ', 'training_schedule_view', 'Training Schedule ', 73, 1, 3, NULL, NULL),
+(100, 'Exam Schedule', 'exam_schedule_view', 'Exam Schedule', 73, 1, 4, NULL, NULL),
 (101, 'New Rating ', 'new_rating_view', 'New Rating ', 96, 1, 5, NULL, NULL),
 (102, 'Bulk Upload', 'sales_bulk_upload_view', 'Bulk Upload', 90, 1, 1, NULL, NULL),
 (103, 'Create Lead', 'create_lead_view', 'Create Lead', 78, 1, 0, NULL, NULL),
-(104, 'New Occupation ', 'new_occupation_view', 'New Occupation ', 96, 1, 0, NULL, NULL);
+(104, 'New Occupation ', 'new_occupation_view', 'New Occupation ', 96, 1, 0, NULL, NULL),
+(105, 'Exam name', 'exam_name_list', 'Exam name List', 96, 1, 4, NULL, NULL),
+(106, 'Exam name Create View', 'exam_name_create', 'Exam name Create View', 0, 1, 0, NULL, NULL),
+(107, 'EXAM NAME CREATE ACTION', 'exam_name_create_action', 'EXAM NAME CREATE ACTION', 0, 1, 0 , NULL, NULL),
+(108, 'Exam name Edit View', 'exam_name_update', 'Exam name Edit View', 0, 1, 0, NULL, NULL),
+(109, 'EXAM NAME EDIT ACTION', 'exam_name_update_action', 'EXAM NAME EDIT ACTION form', 0, 1, 0, NULL, NULL);
 
 
 INSERT INTO `mxp_role` (`id`, `name`, `company_id`, `cm_group_id`, `is_active`, `created_at`, `updated_at`) VALUES
