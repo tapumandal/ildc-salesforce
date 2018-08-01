@@ -52,8 +52,8 @@
 								<div class="col-md-3 col-md-offset-4">
 									<div class="select">
 										<select class="form-control" type="select" name="isActive" >
-											<option  value="1" name="isActive" >Active</option>
-											<option value="0" name="isActive" >Inactive</option>
+											<option  value="1" name="isActive" {{($value->is_active == 1)? 'selected' : '' }}>Active</option>
+											<option value="0" name="isActive" {{($value->is_active == 0)? 'selected' : '' }}>Inactive</option>
 									    </select>
 									</div>
 								</div>
