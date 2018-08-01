@@ -122,12 +122,7 @@
                                         @else
                                         @endif
                                     </div>
-                                    @if($application_details->nid_validation_status == 'Submitted')
-                                    <div class="form-group" style="width: 100%; float: left;">
-                                        <a href="{{ route('applicant_nid_validate_action', [$application_details->application_no, 'Valid'] ) }}" style="float: left; width: 37.5%;" class="btn btn-success">Valid</a>
-                                        <a href="{{ route('applicant_nid_validate_action', [$application_details->application_no, 'InValid'] ) }}" style="float: left; width: 37.5%; margin-left: 5%;" class="btn btn-danger">InValid</a>
-                                    </div>
-                                    @endif
+                                    
                                 </div>
 
 
@@ -313,10 +308,12 @@
                         </div>
                     </div>
 
-            </div>
-    </div>
-     <div class="panel panel-default">
-        <div class="panel-heading">
+            </div>  
+    {{-- </div> --}}
+
+    <div class="col-sm-12" style="">
+     <div class=" panel panel-default">
+        <div class="panel-heading" >
             <h3 class="panel-title">Educational/Professional Information</h3>
         </div>
         <div class="panel-body">
@@ -403,7 +400,8 @@
             </div>
             </div>
             </div>
-
+            </div>
+<div class="col-sm-12" style="">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Paymement</h3>
@@ -481,11 +479,48 @@
                         </div>
                     @endif
 
+                    </div>
+                    
+            
+</div>
+</div>
+</div>
 
 
+
+<div class="col-sm-12" style="text-align: center;">
+    <div class=" panel panel-default">
+    @if($application_details->application_status == 'Submitted')
+    
+        <div class="panel-body">
+            
+            <div class="form-group" style="width: 100%; float: left;">
+                <a href="{{ route('applicant_nid_validate_action', [$application_details->application_no, 'Valid'] ) }}" style="float: right; width: 25%;" class="btn btn-success">In Progress</a>
+                <a href="{{ route('applicant_nid_validate_action', [$application_details->application_no, 'InValid'] ) }}" style="float: right; width: 25%; margin-right: 5%;" class="btn btn-danger">Rejecte</a>
             </div>
+            
+        </div>
+   @elseif($application_details->application_status == 'InProgress') 
+    <div class="alert alert-primary" style="margin-bottom: 0px; background:#cce5ff; color:#004085;" role="alert">
+      The Application is {{ $application_details->application_status }}.
+    </div>
+@elseif($application_details->application_status == 'Approved') 
+    <div class="alert alert-success" role="alert" style="margin-bottom: 0px; background:#d4edda; color:#155724;">
+      The Application is {{ $application_details->application_status }}.
+    </div>
+@elseif($application_details->application_status == 'PartiallyCompleted') 
+    <div class="alert alert-warning" role="alert" style="margin-bottom: 0px; background:#fff3cd; color:#856404;">
+      The Application is {{ $application_details->application_status }}.
+    </div>
+@elseif($application_details->application_status == 'Rejected') 
+    <div class="alert alert-danger" role="alert" style="margin-bottom: 0px; background:#f8d7da; color:#721c24;">
+      The Application is {{ $application_details->application_status }}.
+    </div>
+@endif
 </div>
 </div>
+
+
 
 
 @endsection
