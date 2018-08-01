@@ -6,14 +6,11 @@ var ifaManagementFilterSearch = (function(){
 			var menuValue 	= '';
 			var sortbyValue = '';
 				
-			$('#selectMenuOption').on('change',function(){
-				menuValue = $.trim($("#selectMenuOption").find(":selected").val());
-			});
 			$('#selectSortbyValue').on('change',function(){
 				sortbyValue = $.trim($("#selectSortbyValue").find(":selected").val());
 			});
-
-			$('#searchIfaMangment').on('click',function(e){
+			$('#selectMenuOption').on('change',function(){
+				menuValue = $.trim($("#selectMenuOption").find(":selected").val());
 				e.preventDefault();
 				$('.pagination_body').addClass('hidden');
 				var formDateValue 	= $("input[name='date[from]']").val();
@@ -48,7 +45,7 @@ var ifaManagementFilterSearch = (function(){
 		          success: function(result) {
 		          	var data = JSON.parse(result);
 		          	console.log(data);
-		          	addRow(data,0);
+		          	addRowIfa(data,0);
 		          },
 		          error:function(result){
 		            alert("Some thing is Wrong");
@@ -82,7 +79,7 @@ function checkOneTrueValue(value = {},id = {}){
 	return boolen ;
 }
 
-function addRow(results, start)
+function addRowIfaIfa(results, start)
 {	
 	$('.pagination').empty();
     $('#ifa_list_tbody').empty();
@@ -111,33 +108,33 @@ function addRow(results, start)
 	    for (var i = start; i < end; i++)
 	    {
 	        $('#ifa_list_tbody').append('<tr class="ifa_list_tbody"><td>'+sl+
-	            '</td><td>'+ emptyCheck(rows[i].first_name) +
-	            '</td><td>'+ emptyCheck(rows[i].last_name) +
-	            '</td><td>'+ emptyCheck(rows[i].mobile_no) +
-	            '</td><td>'+ emptyCheck(rows[i].email) +
-	            '</td><td>'+ emptyCheck(rows[i].created_at) +
-	            '</td><td>'+ emptyCheck(rows[i].nationality) +
+	            '</td><td>'+ emptyCheckss(rows[i].first_name) +
+	            '</td><td>'+ emptyCheckss(rows[i].last_name) +
+	            '</td><td>'+ emptyCheckss(rows[i].mobile_no) +
+	            '</td><td>'+ emptyCheckss(rows[i].email) +
+	            '</td><td>'+ emptyCheckss(rows[i].created_at) +
+	            '</td><td>'+ emptyCheckss(rows[i].nationality) +
 	            '</td></tr>');
 	        sl++;
 	    }
 	}
 
-    setPagination(results, position);
+    setPaginationss(results, position);
 
     $('.pagination li').on('click',(function () {
         var begin = $(this).attr("data-page");
-        addRow(results, begin-1);
+        addRowIfa(results, begin-1);
     }));
 
 }
 
-function emptyCheck(value){
+function emptyCheckss(value){
 	return ((value == null ) ? "" : value) ;
 }
 
 
 
-function setPagination(results, position) {
+function setPaginationss(results, position) {
     var pageNum = Math.ceil(results.length/15);
     var previous = (position-1);
     var next = (position+1);
@@ -185,7 +182,7 @@ var ifaManagementReset = (function(){
 		          async: false,
 		          success: function(result) {
 		          	var data = JSON.parse(result);
-		          	addRow(data,0)		          	
+		          	addRowIfa(data,0)		          	
 		          },
 		          error:function(result){
 		            alert("Some thing is Wrong");
