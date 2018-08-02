@@ -65,7 +65,7 @@
 
 
                             <div class="row">
-                                <div class="col-sm-4">
+                                {{-- <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="nationality">Nationality</label>
                                             @if (isset($application_details->nationality_info))
@@ -77,7 +77,25 @@
                                         <label for="others_nationality">Others Nationality</label>
                                         <input readonly type="text" class="form-control" id="others_nationality" name="others_nationality" placeholder="Others Nationality" value="{{ $application_details->others_nationality }}">
                                     </div>
-                                </div>
+                                </div> --}}
+
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="nationality">Nationality</label>
+
+                                                @if(strtolower($application_details->nationality) == 'bangladesh' )
+                                                    <select class="form-control" id="nationality" readonly>
+                                                        <option >Bangladesh</option>
+                                                    </select>
+                                                @else
+                                                    <select class="form-control" id="nationality" readonly>
+                                                        <option >{{$application_details->others_nationality}}</option>
+                                                    </select>
+                                                @endif
+                                            </div>
+                                        </div>
+
+
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="date_of_birth">Date of Birth  </label>
@@ -501,19 +519,19 @@
             
         </div>
    @elseif($application_details->application_status == 'InProgress') 
-    <div class="alert alert-primary" style="margin-bottom: 0px; background:#cce5ff; color:#004085;" role="alert">
+    <div class="alert alert-primary" style="margin-bottom: 0px; background:#cce5ff; color:#004085; width: 100%;" role="alert">
       The Application is {{ $application_details->application_status }}.
     </div>
 @elseif($application_details->application_status == 'Approved') 
-    <div class="alert alert-success" role="alert" style="margin-bottom: 0px; background:#d4edda; color:#155724;">
+    <div class="alert alert-success" role="alert" style="margin-bottom: 0px; background:#d4edda; color:#155724; width: 100%;">
       The Application is {{ $application_details->application_status }}.
     </div>
 @elseif($application_details->application_status == 'PartiallyCompleted') 
-    <div class="alert alert-warning" role="alert" style="margin-bottom: 0px; background:#fff3cd; color:#856404;">
+    <div class="alert alert-warning" role="alert" style="margin-bottom: 0px; background:#fff3cd; color:#856404; width: 100%;">
       The Application is {{ $application_details->application_status }}.
     </div>
 @elseif($application_details->application_status == 'Rejected') 
-    <div class="alert alert-danger" role="alert" style="margin-bottom: 0px; background:#f8d7da; color:#721c24;">
+    <div class="alert alert-danger" role="alert" style="margin-bottom: 0px; background:#f8d7da; color:#721c24; width: 100%;">
       The Application is {{ $application_details->application_status }}.
     </div>
 @endif

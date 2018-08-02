@@ -7,7 +7,7 @@
         <!-- <div class="panel-body"> -->
             <div class="col-sm-10">
                 <div class="form-group col-sm-4" id="error_1">
-                    <label class="col-sm-4 control-label">Application Status</label>
+                    <label class="col-sm-12 control-label">Application Status</label>
                         <select class="form-control" id="selectMenuOption">
                             <option value=""> Choose a Option</option>
                             @foreach($getFilterOptionValue as $OptionValues)
@@ -75,7 +75,6 @@
                         <th class="">Mobile No.</th>
                         <th class="">Email</th>
                         <th class="">Brithday</th>
-                        <th class="">Nationality</th>
                         <th class="">Action</th>
                     </tr>
                 </thead>
@@ -89,7 +88,6 @@
                             <td>{{$value->mobile_no}}</td>
                             <td>{{$value->email}}</td>
                             <td>{{$value->date_of_birth}}</td>
-                            <td>{{$value->nationality}}</td>
                             <td>
                                 <a href="{{ route('application_details_view', $value->application_no) }}">View</a>
                             </td>

@@ -114,7 +114,6 @@ function addRowIfa(results, start)
 	            '</td><td>'+ emptyCheckss(rows[i].mobile_no) +
 	            '</td><td>'+ emptyCheckss(rows[i].email) +
 	            '</td><td>'+ emptyCheckss(rows[i].created_at) +
-	            '</td><td>'+ emptyCheckss(rows[i].nationality) +
 	            '<td><a href="'+root_url+'applicant/'+rows[i].application_no+'/details">View</a></td>'+
 	            '</td></tr>');
 	        sl++;
