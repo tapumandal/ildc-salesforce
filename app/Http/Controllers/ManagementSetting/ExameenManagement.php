@@ -79,6 +79,12 @@ class ExameenManagement extends Controller
 
         foreach ($req->exam_status as $applicant_no => $resStatus){
                 ApplicantTraining::where('application_no', $applicant_no)->update(['training_status' => $resStatus]);
+                if($resStatus == 'Pass'){
+                    ApplicantTraining::where('application_no', $applicant_no)->update(['application_status' => 'Approved']);
+                }else if($resStatus == 'Fail'){
+                    ApplicantTraining::where('application_no', $applicant_no)->update(['application_status' => 'InProgress']);
+                }
+                
 
             $applicantDetails = ApplicantTraining::where('application_no', $applicant_no)->first();
             $mailPerInfo = [
